@@ -1,43 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0b0f" />
+  <meta name="description" content="Ayushyaa – A Living Portfolio" />
+  <link rel="icon" href="%PUBLIC_URL%/profile.jpg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Ayushyaa......</title>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    body {
+      background: #0b0b0f;
+      color: #e5e7eb;
+      overflow: hidden;
+      font-family: "Times New Roman", Times, serif;
+    }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+    /* LOADER */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #0b0b0f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease;
+    }
+
+    /* SIMPLE BUT ELEGANT NAME */
+    .name {
+      font-size: 3.5rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      margin-bottom: 4rem;
+      color: transparent;
+      background: linear-gradient(90deg, #e5e7eb 50%, transparent 50%);
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: reveal 2s ease-in-out forwards;
+    }
+
+    @keyframes reveal {
+      0% {
+        background-position: 100% 0;
+        letter-spacing: 0.8em;
+      }
+      100% {
+        background-position: 0 0;
+        letter-spacing: 0.3em;
+      }
+    }
+
+    /* ELEGANT LINE LOADER */
+    .line-loader {
+      width: 300px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+
+    .line-fill {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: #e5e7eb;
+      transform: translateX(-100%);
+      animation: slide 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(-100%);
+      }
+      50% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* FLOATING TEXT */
+    .floating-text {
+      position: relative;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      margin-top: 3rem;
+      color: rgba(229, 231, 235, 0.6);
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* CIRCLES */
+    .circles {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.5s forwards;
+    }
+
+    .circle {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #e5e7eb;
+      opacity: 0.3;
+      animation: breathe 2s infinite ease-in-out;
+    }
+
+    .circle:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .circle:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .circle:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        transform: scale(0.8);
+        opacity: 0.3;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+      }
+    }
+
+    /* SUBTLE BACKGROUND PATTERN */
+    .bg-pattern {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.05;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      background-position: 0 0, 25px 25px;
+      animation: patternShift 20s linear infinite;
+    }
+
+    @keyframes patternShift {
+      0% {
+        background-position: 0 0, 25px 25px;
+      }
+      100% {
+        background-position: 50px 50px, 75px 75px;
+      }
+    }
+
+    /* NUMBER COUNTER */
+    .counter {
+      font-size: 3rem;
+      font-weight: 200;
+      font-variant-numeric: tabular-nums;
+      color: rgba(229, 231, 235, 0.8);
+      margin: 2rem 0;
+      position: relative;
+    }
+
+    .counter::after {
+      content: '%';
+      font-size: 1.5rem;
+      position: absolute;
+      top: -0.5rem;
+      margin-left: 0.2rem;
+    }
+
+    /* REACT ROOT */
+    #root {
+      display: none;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .name {
+        font-size: 2rem;
+        letter-spacing: 0.2em;
+      }
+      .counter {
+        font-size: 2rem;
+      }
+      .line-loader {
+        width: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loader">
+    <div class="bg-pattern"></div>
+    
+    <div class="circles">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+    
+    <div class="name">AYUSHYAA</div>
+    
+    <div class="counter" id="counter">0</div>
+    
+    <div class="line-loader">
+      <div class="line-fill"></div>
+    </div>
+    
+    <div class="floating-text">Awaiting creative energy</div>
+  </div>
+
+  <!-- REACT APP -->
+  <div id="root"></div>
+
+  <script>
+    // Counter animation
+    let count = 0;
+    const counter = document.getElementById('counter');
+    const countInterval = setInterval(() => {
+      count++;
+      counter.textContent = count;
+      
+      // Smooth transition at the end
+      if (count >= 100) {
+        clearInterval(countInterval);
+        
+        // Small pause at 100%
+        setTimeout(() => {
+          document.getElementById('loader').style.opacity = '0';
+          
+          setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('root').style.display = 'block';
+            document.body.style.overflow = 'auto';
+          }, 600);
+        }, 300);
+      }
+    }, 30);
+
+    // Floating text changes
+    const texts = [
+      "Awaiting creative energy",
+      "Preparing canvas",
+      "Calibrating vision",
+      "Almost there"
+    ];
+    
+    const floatingText = document.querySelector('.floating-text');
+    let textIndex = 0;
+    
+    setInterval(() => {
+      textIndex = (textIndex + 1) % texts.length;
+      floatingText.style.opacity = '0';
+      
+      setTimeout(() => {
+        floatingText.textContent = texts[textIndex];
+        floatingText.style.opacity = '1';
+      }, 400);
+    }, 2000);
+
+    // Name animation on hover (optional interaction)
+    const nameEl = document.querySelector('.name');
+    nameEl.addEventListener('mouseenter', () => {
+      nameEl.style.animation = 'none';
+      setTimeout(() => {
+        nameEl.style.animation = 'reveal 1s ease-in-out forwards';
+      }, 10);
+    });
+  </script>
+
+</body>
 </html>
