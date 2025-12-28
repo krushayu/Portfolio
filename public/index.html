@@ -1,302 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b0b0f" />
-  <meta name="description" content="Ayushyaa – A Living Portfolio" />
-  <link rel="icon" href="%PUBLIC_URL%/profile.jpg" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap" rel="stylesheet" />
-  <title>Ayushyaa......</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0b0f" />
+    <meta name="description" content="Ayushyaa – A Living Portfolio" />
+    <link rel="icon" href="%PUBLIC_URL%/profile.jpg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="google-site-verification" content="12vg5LyD2IAu_oDhJJgwfroEYEontjpMWMeWgVBmdUM" />
+    <!-- Primary SEO Meta Tags -->
+    <title>Ayushyaa......</title>
+    <meta
+      name="title"
+      content="Ayushyaa | Aayush Raj – Full Stack Developer Portfolio"
+    />
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta
+      name="description"
+      content="Ayushyaa is the living portfolio of Aayush Raj, a Full Stack Developer skilled in React, Node.js, Express, MySQL, and modern web technologies."
+    />
 
-    body {
-      background: #0b0b0f;
-      color: #e5e7eb;
-      overflow: hidden;
-      font-family: "Times New Roman", Times, serif;
-    }
+    <meta
+      name="keywords"
+      content="
+  Aayush Raj,
+  Aayush Shrivastava,
+  Ayush,
+  Ayushyaa,
+  Aayush Developer,
+  Ayush Portfolio,
+  Developer,
+  Web Developer,
+  Software Developer,
+  Full Stack Developer,
+  MERN Developer,
+  React Developer,
+  Node.js Developer,
+  Express.js Developer,
+  MongoDB Developer,
+  MySQL Developer,
+  JavaScript Developer,
+  Frontend Developer,
+  Backend Developer,
+  India Developer,
+  Indian Developer,
+  React MERN Developer India,
+  Full Stack Developer India,
+  Best Developer Portfolio,
+  Best Portfolio Website,
+  No 1 Developer Portfolio,
+  Personal Portfolio Website,
+  Portfolio Website India,
+  Custom Developer Portfolio,
+  Creative Developer Portfolio,
+  Modern Portfolio Website,
+  Professional Portfolio Developer,
+  Hire React Developer India,
+  Hire MERN Developer,
+  Hire Full Stack Developer,
+  Web Developer India,
+  Software Engineer India
+  "
+    />
 
-    /* LOADER */
-    #loader {
-      position: fixed;
-      inset: 0;
-      background: #0b0b0f;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.6s ease;
-    }
+    <meta name="author" content="Aayush Raj" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
 
-    /* SIMPLE BUT ELEGANT NAME */
-    .name {
-      font-size: 3.5rem;
-      font-weight: 300;
-      letter-spacing: 0.3em;
-      margin-bottom: 4rem;
-      color: transparent;
-      background: linear-gradient(90deg, #e5e7eb 50%, transparent 50%);
-      background-size: 200% 100%;
-      background-position: 100% 0;
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: reveal 2s ease-in-out forwards;
-    }
+    <!-- Open Graph (OG) Meta Tags for Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ayushyaa" />
 
-    @keyframes reveal {
-      0% {
-        background-position: 100% 0;
-        letter-spacing: 0.8em;
+    <meta
+      property="og:title"
+      content="Ayushyaa | Aayush Raj – Full Stack MERN Developer Portfolio"
+    />
+    <meta
+      property="og:description"
+      content="Ayushyaa is the living portfolio of Aayush Raj, a Full Stack MERN Developer from India, showcasing modern React and full stack projects."
+    />
+
+    <meta property="og:url" content="https://krushayu.in/" />
+
+    <meta property="og:image" content="https://krushayu.in/profile.jpg" />
+    <meta
+      property="og:image:secure_url"
+      content="https://krushayu.in/profile.jpg"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Ayushyaa – Aayush Raj Developer Portfolio"
+    />
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://krushayu.in" />
+    <!-- Structured Data (JSON-LD for Google Rich Results) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Aayush Raj",
+        "alternateName": "Ayushyaa",
+        "url": "https://krushayu.in/",
+        "image": "https://krushayu.in/profile.jpg",
+        "jobTitle": "Full Stack MERN Developer",
+        "description": "Aayush Raj is a Full Stack MERN Developer from India, specializing in React, Node.js, Express, MongoDB, and MySQL. Creator of the Ayushyaa living portfolio.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "India"
+        },
+        "knowsAbout": [
+          "React",
+          "JavaScript",
+          "MERN Stack",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "MySQL",
+          "Frontend Development",
+          "Backend Development",
+          "Web Development"
+        ],
+        "sameAs": [
+          "https://github.com/krushayu",
+          "https://www.linkedin.com/krushayu",
+          "https://www.instagram.com/krushayu"
+        ]
       }
-      100% {
-        background-position: 0 0;
-        letter-spacing: 0.3em;
+    </script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-    }
 
-    /* ELEGANT LINE LOADER */
-    .line-loader {
-      width: 300px;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.1);
-      position: relative;
-      overflow: hidden;
-      margin: 2rem 0;
-    }
-
-    .line-fill {
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      background: #e5e7eb;
-      transform: translateX(-100%);
-      animation: slide 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    @keyframes slide {
-      0% {
-        transform: translateX(-100%);
+      body {
+        background: #0b0b0f;
+        color: #e5e7eb;
+        overflow: hidden;
+        font-family: "Caveat", cursive;
       }
-      50% {
-        transform: translateX(0);
+
+      /* LOADER */
+      #loader {
+        position: fixed;
+        inset: 0;
+        background: #0b0b0f;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.6s ease;
       }
-      100% {
-        transform: translateX(100%);
-      }
-    }
 
-    /* FLOATING TEXT */
-    .floating-text {
-      position: relative;
-      font-size: 1rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      margin-top: 3rem;
-      color: rgba(229, 231, 235, 0.6);
-      opacity: 0;
-      animation: fadeIn 1s ease 1s forwards;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* CIRCLES */
-    .circles {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 3rem;
-      opacity: 0;
-      animation: fadeIn 1s ease 0.5s forwards;
-    }
-
-    .circle {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #e5e7eb;
-      opacity: 0.3;
-      animation: breathe 2s infinite ease-in-out;
-    }
-
-    .circle:nth-child(1) {
-      animation-delay: 0s;
-    }
-    .circle:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-    .circle:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes breathe {
-      0%, 100% {
-        transform: scale(0.8);
-        opacity: 0.3;
-      }
-      50% {
-        transform: scale(1.2);
-        opacity: 0.8;
-      }
-    }
-
-    /* SUBTLE BACKGROUND PATTERN */
-    .bg-pattern {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0.05;
-      background-image: 
-        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px),
-        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px);
-      background-size: 50px 50px;
-      background-position: 0 0, 25px 25px;
-      animation: patternShift 20s linear infinite;
-    }
-
-    @keyframes patternShift {
-      0% {
-        background-position: 0 0, 25px 25px;
-      }
-      100% {
-        background-position: 50px 50px, 75px 75px;
-      }
-    }
-
-    /* NUMBER COUNTER */
-    .counter {
-      font-size: 3rem;
-      font-weight: 200;
-      font-variant-numeric: tabular-nums;
-      color: rgba(229, 231, 235, 0.8);
-      margin: 2rem 0;
-      position: relative;
-    }
-
-    .counter::after {
-      content: '%';
-      font-size: 1.5rem;
-      position: absolute;
-      top: -0.5rem;
-      margin-left: 0.2rem;
-    }
-
-    /* REACT ROOT */
-    #root {
-      display: none;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
+      /* SIMPLE BUT ELEGANT NAME */
       .name {
-        font-size: 2rem;
-        letter-spacing: 0.2em;
+        font-size: 3.5rem;
+        font-weight: 300;
+        letter-spacing: 0.3em;
+        margin-bottom: 4rem;
+        color: transparent;
+        background: linear-gradient(90deg, #e5e7eb 50%, transparent 50%);
+        background-size: 200% 100%;
+        background-position: 100% 0;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: reveal 2s ease-in-out forwards;
       }
-      .counter {
-        font-size: 2rem;
+
+      @keyframes reveal {
+        0% {
+          background-position: 100% 0;
+          letter-spacing: 0.8em;
+        }
+        100% {
+          background-position: 0 0;
+          letter-spacing: 0.3em;
+        }
       }
+
+      /* ELEGANT LINE LOADER */
       .line-loader {
-        width: 200px;
+        width: 300px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+        margin: 2rem 0;
       }
-    }
-  </style>
-</head>
 
-<body>
+      .line-fill {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: #e5e7eb;
+        transform: translateX(-100%);
+        animation: slide 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
 
-  <!-- LOADING SCREEN -->
-  <div id="loader">
-    <div class="bg-pattern"></div>
-    
-    <div class="circles">
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
+      @keyframes slide {
+        0% {
+          transform: translateX(-100%);
+        }
+        50% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      /* FLOATING TEXT */
+      .floating-text {
+        position: relative;
+        font-size: 1rem;
+        font-weight: 300;
+        letter-spacing: 0.1em;
+        margin-top: 3rem;
+        color: rgba(229, 231, 235, 0.6);
+        opacity: 0;
+        animation: fadeIn 1s ease 1s forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* CIRCLES */
+      .circles {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 3rem;
+        opacity: 0;
+        animation: fadeIn 1s ease 0.5s forwards;
+      }
+
+      .circle {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #e5e7eb;
+        opacity: 0.3;
+        animation: breathe 2s infinite ease-in-out;
+      }
+
+      .circle:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .circle:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .circle:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes breathe {
+        0%,
+        100% {
+          transform: scale(0.8);
+          opacity: 0.3;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0.8;
+        }
+      }
+
+      /* SUBTLE BACKGROUND PATTERN */
+      .bg-pattern {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0.05;
+        background-image: radial-gradient(
+            circle at 25% 25%,
+            rgba(255, 255, 255, 0.1) 1px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle at 75% 75%,
+            rgba(255, 255, 255, 0.1) 1px,
+            transparent 1px
+          );
+        background-size: 50px 50px;
+        background-position: 0 0, 25px 25px;
+        animation: patternShift 20s linear infinite;
+      }
+
+      @keyframes patternShift {
+        0% {
+          background-position: 0 0, 25px 25px;
+        }
+        100% {
+          background-position: 50px 50px, 75px 75px;
+        }
+      }
+
+      /* NUMBER COUNTER */
+      .counter {
+        font-size: 3rem;
+        font-weight: 200;
+        font-variant-numeric: tabular-nums;
+        color: rgba(229, 231, 235, 0.8);
+        margin: 2rem 0;
+        position: relative;
+      }
+
+      .counter::after {
+        content: "%";
+        font-size: 1.5rem;
+        position: absolute;
+        top: -0.5rem;
+        margin-left: 0.2rem;
+      }
+
+      /* REACT ROOT */
+      #root {
+        display: none;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .name {
+          font-size: 2rem;
+          letter-spacing: 0.2em;
+        }
+        .counter {
+          font-size: 2rem;
+        }
+        .line-loader {
+          width: 200px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- LOADING SCREEN -->
+    <div id="loader">
+      <div class="bg-pattern"></div>
+
+      <div class="circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+
+      <div class="name">AYUSHYAA</div>
+
+      <div class="counter" id="counter">0</div>
+
+      <div class="line-loader">
+        <div class="line-fill"></div>
+      </div>
+
+      <div class="floating-text">Awaiting creative energy</div>
     </div>
-    
-    <div class="name">AYUSHYAA</div>
-    
-    <div class="counter" id="counter">0</div>
-    
-    <div class="line-loader">
-      <div class="line-fill"></div>
-    </div>
-    
-    <div class="floating-text">Awaiting creative energy</div>
-  </div>
 
-  <!-- REACT APP -->
-  <div id="root"></div>
+    <!-- REACT APP -->
+    <div id="root"></div>
 
-  <script>
-    // Counter animation
-    let count = 0;
-    const counter = document.getElementById('counter');
-    const countInterval = setInterval(() => {
-      count++;
-      counter.textContent = count;
-      
-      // Smooth transition at the end
-      if (count >= 100) {
-        clearInterval(countInterval);
-        
-        // Small pause at 100%
-        setTimeout(() => {
-          document.getElementById('loader').style.opacity = '0';
-          
+    <script>
+      // Counter animation
+      let count = 0;
+      const counter = document.getElementById("counter");
+      const countInterval = setInterval(() => {
+        count++;
+        counter.textContent = count;
+
+        // Smooth transition at the end
+        if (count >= 100) {
+          clearInterval(countInterval);
+
+          // Small pause at 100%
           setTimeout(() => {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('root').style.display = 'block';
-            document.body.style.overflow = 'auto';
-          }, 600);
-        }, 300);
-      }
-    }, 30);
+            document.getElementById("loader").style.opacity = "0";
 
-    // Floating text changes
-    const texts = [
-      "Awaiting creative energy",
-      "Preparing canvas",
-      "Calibrating vision",
-      "Almost there"
-    ];
-    
-    const floatingText = document.querySelector('.floating-text');
-    let textIndex = 0;
-    
-    setInterval(() => {
-      textIndex = (textIndex + 1) % texts.length;
-      floatingText.style.opacity = '0';
-      
-      setTimeout(() => {
-        floatingText.textContent = texts[textIndex];
-        floatingText.style.opacity = '1';
-      }, 400);
-    }, 2000);
+            setTimeout(() => {
+              document.getElementById("loader").style.display = "none";
+              document.getElementById("root").style.display = "block";
+              document.body.style.overflow = "auto";
+            }, 600);
+          }, 300);
+        }
+      }, 30);
 
-    // Name animation on hover (optional interaction)
-    const nameEl = document.querySelector('.name');
-    nameEl.addEventListener('mouseenter', () => {
-      nameEl.style.animation = 'none';
-      setTimeout(() => {
-        nameEl.style.animation = 'reveal 1s ease-in-out forwards';
-      }, 10);
-    });
-  </script>
+      // Floating text changes
+      const texts = [
+        "Awaiting creative energy",
+        "Preparing canvas",
+        "Calibrating vision",
+        "Almost there",
+      ];
 
-</body>
+      const floatingText = document.querySelector(".floating-text");
+      let textIndex = 0;
+
+      setInterval(() => {
+        textIndex = (textIndex + 1) % texts.length;
+        floatingText.style.opacity = "0";
+
+        setTimeout(() => {
+          floatingText.textContent = texts[textIndex];
+          floatingText.style.opacity = "1";
+        }, 400);
+      }, 2000);
+
+      const nameEl = document.querySelector(".name");
+      nameEl.addEventListener("mouseenter", () => {
+        nameEl.style.animation = "none";
+        setTimeout(() => {
+          nameEl.style.animation = "reveal 1s ease-in-out forwards";
+        }, 10);
+      });
+    </script>
+  </body>
 </html>
