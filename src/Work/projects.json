@@ -7,40 +7,96 @@
       "color": "#3B82F6",
       "projects": [
         {
+          "id": 4,
+          "title": "Personal React Portfolio Website",
+          "year": "2025",
+          "month": "December",
+          "description": "A modern, responsive personal portfolio website showcasing projects, skills, and contact information with smooth navigation and clean UI.",
+          "technologies": [
+            "React",
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "Netlify"
+          ],
+          "features": [
+            "Responsive design",
+            "Single Page Application",
+            "Custom domain",
+            "Project showcase"
+          ],
+          "liveLink": "https://krushayu.in",
+          "githubLink": "https://github.com/krushayu/Portfolio",
+          "status": "✅ Completed"
+        },
+        {
+          "id": 3,
+          "title": "Ventify – Chatting Web Application",
+          "year": "2025",
+          "month": "October",
+          "description": "A real-time chatting web application where users can communicate seamlessly. Core features are implemented, but deployment is currently facing errors and is under progress.",
+          "technologies": [
+            "React",
+            "Node.js",
+            "Express",
+            "Socket.io",
+            "MongoDB"
+          ],
+          "features": [
+            "Real-time messaging",
+            "User authentication",
+            "Modern chat UI",
+            "Scalable backend"
+          ],
+          "liveLink": "#",
+          "githubLink": "https://github.com/krushayu/Ventify-A-Chating-WebApp",
+          "status": "🚧 In Progress (Deployment issues)"
+        },
+        {
+          "id": 2,
+          "title": "HelpForYou – Online Complaint Management System",
+          "year": "2025",
+          "month": "September",
+          "description": "A web-based online complaint management system that allows users to submit complaints digitally and helps streamline issue reporting.",
+          "technologies": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Node.js",
+            "MySQL"
+          ],
+          "features": [
+            "Complaint registration",
+            "User-friendly interface",
+            "Digital issue tracking",
+            "Structured complaint data"
+          ],
+          "liveLink": "#",
+          "githubLink": "https://github.com/krushayu/HelpForYou",
+          "status": "✅ Completed"
+        },
+        {
           "id": 1,
           "title": "HealthHub",
           "year": "2025",
           "month": "February",
           "description": "Health Data Management Platform with real-time doctor consultations, appointment booking, and personalized health recommendations.",
-          "technologies": ["React", "Node.js", "MongoDB", "Socket.io", "Tailwind CSS"],
-          "features": ["Real-time chat", "Appointment system", "Health tracking", "Prescription management"],
+          "technologies": [
+            "React",
+            "Node.js",
+            "MongoDB",
+            "Socket.io",
+            "Tailwind CSS"
+          ],
+          "features": [
+            "Real-time chat",
+            "Appointment system",
+            "Health tracking",
+            "Prescription management"
+          ],
           "liveLink": "http://health-hub-cutm-pkd.vercel.app/",
           "githubLink": "https://github.com/ayushyaa/HealthHub",
           "status": "🏆 Hackathon Winner"
-        },
-        {
-          "id": 2,
-          "title": "E-Commerce Platform",
-          "year": "2024",
-          "month": "December",
-          "description": "Full-featured online shopping platform with user authentication, product management, cart, and payment integration.",
-          "technologies": ["MERN Stack", "Redux", "Stripe API", "Cloudinary"],
-          "features": ["User auth", "Product catalog", "Payment gateway", "Admin dashboard"],
-          "liveLink": "#",
-          "githubLink": "https://github.com/ayushyaa/ecommerce-platform",
-          "status": "✅ Completed"
-        },
-        {
-          "id": 3,
-          "title": "TaskFlow Pro",
-          "year": "2024",
-          "month": "October",
-          "description": "Advanced task management application with drag-drop interface, team collaboration, and productivity analytics.",
-          "technologies": ["React", "Express", "PostgreSQL", "Socket.io"],
-          "features": ["Drag & drop", "Team collaboration", "Real-time updates", "Analytics"],
-          "liveLink": "#",
-          "githubLink": "https://github.com/ayushyaa/taskflow-pro",
-          "status": "🚧 In Development"
         }
       ]
     },
@@ -51,27 +107,30 @@
       "color": "#10B981",
       "projects": [
         {
-          "id": 4,
-          "title": "Stock Prediction AI",
-          "year": "2024",
-          "month": "September",
-          "description": "Machine learning model for stock price prediction using LSTM neural networks and historical market data.",
-          "technologies": ["Python", "TensorFlow", "Pandas", "Scikit-learn", "Matplotlib"],
-          "features": ["LSTM model", "Real-time data", "Prediction accuracy", "Visualization"],
+          "id": "1",
+          "title": "Wild Animal Detection & Alert System",
+          "year": "2025",
+          "month": "January",
+          "description": "An AI-based wild animal detection system that identifies animals using Python-based computer vision and sends real-time email alerts with images using a Node.js (Express) backend and Nodemailer.",
+          "technologies": [
+            "Python",
+            "OpenCV",
+            "TensorFlow",
+            "Node.js",
+            "Express.js",
+            "Nodemailer",
+            "YoloV8"
+          ],
+          "features": [
+            "Wild animal detection using AI",
+            "Image and video processing",
+            "Automatic alert email with detected animal image",
+            "Python-based detection logic",
+            "Node.js backend for email notifications",
+            "Human–wildlife conflict prevention"
+          ],
           "liveLink": "#",
-          "githubLink": "https://github.com/ayushyaa/stock-prediction-ai",
-          "status": "✅ Completed"
-        },
-        {
-          "id": 5,
-          "title": "Customer Segmentation",
-          "year": "2024",
-          "month": "July",
-          "description": "Customer segmentation analysis using K-means clustering for targeted marketing strategies.",
-          "technologies": ["Python", "Scikit-learn", "Seaborn", "Jupyter"],
-          "features": ["K-means clustering", "Data visualization", "Customer profiling", "Insights generation"],
-          "liveLink": "#",
-          "githubLink": "https://github.com/ayushyaa/customer-segmentation",
+          "githubLink": "#",
           "status": "✅ Completed"
         }
       ]
@@ -83,27 +142,25 @@
       "color": "#F59E0B",
       "projects": [
         {
-          "id": 6,
-          "title": "Automation Scripts",
+          "id": 1,
+          "title": "Simple Image Editor",
           "year": "2024",
           "month": "June",
-          "description": "Collection of Python automation scripts for file management, web scraping, and data processing.",
-          "technologies": ["Python", "Selenium", "BeautifulSoup", "Pandas", "OpenPyXL"],
-          "features": ["File automation", "Web scraping", "Data processing", "Excel operations"],
-          "liveLink": "#",
-          "githubLink": "https://github.com/ayushyaa/python-automation",
-          "status": "✅ Completed"
-        },
-        {
-          "id": 7,
-          "title": "WeatherWise AI",
-          "year": "2024",
-          "month": "August",
-          "description": "AI-powered weather prediction application with interactive maps and personalized alerts.",
-          "technologies": ["Python", "TensorFlow", "FastAPI", "OpenWeather API"],
-          "features": ["AI predictions", "Interactive maps", "Historical data", "Personal alerts"],
-          "liveLink": "#",
-          "githubLink": "https://github.com/ayushyaa/weatherwise-ai",
+          "description": "A basic image editing application that allows users to perform simple image operations such as resizing, cropping, rotating, and applying basic filters.",
+          "technologies": [
+            "Python",
+            "OpenCV",
+            "Pillow (PIL)",
+            "NumPy"
+          ],
+          "features": [
+            "Image resize and crop",
+            "Rotate and flip images",
+            "Basic filters and enhancements",
+            "User-friendly image processing"
+          ],
+          "liveLink": "https://image-editor-six-lovat.vercel.app/",
+          "githubLink": "https://github.com/krushayu/image-editor",
           "status": "✅ Completed"
         }
       ]
@@ -115,28 +172,27 @@
       "color": "#8B5CF6",
       "projects": [
         {
-          "id": 8,
-          "title": "CryptoDashboard",
-          "year": "2024",
-          "month": "April",
-          "description": "Real-time cryptocurrency tracking dashboard with portfolio management and market analytics.",
-          "technologies": ["Next.js", "TypeScript", "WebSocket", "Binance API", "Chart.js"],
-          "features": ["Real-time tracking", "Portfolio management", "Market analytics", "Trading signals"],
+          "id": 1,
+          "title": "Block-Chain Medical Data Storage",
+          "year": "2025",
+          "month": "November",
+          "description": "A blockchain-based medical data storage system that allows secure medical records storage and retrieval using smart contracts, with IPFS hashing and doctor authorization functionality.",
+          "technologies": [
+            "Solidity",
+            "JavaScript",
+            "Web3",
+            "Truffle",
+            "IPFS"
+          ],
+          "features": [
+            "Secure medical record storage",
+            "Doctor authorization system",
+            "Patient record retrieval by address",
+            "IPFS hash integration for data storage"
+          ],
           "liveLink": "#",
-          "githubLink": "https://github.com/ayushyaa/crypto-dashboard",
-          "status": "✅ Completed"
-        },
-        {
-          "id": 9,
-          "title": "Smart Contract Demo",
-          "year": "2024",
-          "month": "March",
-          "description": "Educational smart contract examples for understanding blockchain fundamentals.",
-          "technologies": ["Solidity", "Ethereum", "Web3.js", "Hardhat"],
-          "features": ["Token contract", "Voting system", "Auction contract", "Wallet integration"],
-          "liveLink": "#",
-          "githubLink": "https://github.com/ayushyaa/smart-contract-demo",
-          "status": "✅ Completed"
+          "githubLink": "https://github.com/krushayu/Block-Chain-Medical-Data-Storage",
+          "status": "🚧 In Progress"
         }
       ]
     }
