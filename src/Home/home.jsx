@@ -264,8 +264,10 @@ const Home = () => {
         {/* Header */}
         <header className="portfolio-header">
           <div className="logo">
-            <span className="logo-text">Ayush</span>
-            <div className="logo-line"></div>
+            <Link to="/" className="logo-link">
+              <span className="logo-text">Ayush</span>
+              <div className="logo-line"></div>
+            </Link>
           </div>
           <nav className="navigation">
             <Link to="/" className="nav-item">
