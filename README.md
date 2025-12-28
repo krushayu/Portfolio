@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzZ5Y2F5dG5yY2Z2eWZ6eGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hvRJCLFzcasrR4ia7z/giphy.gif" width="60px" />
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">Ayushyaa Portfolio</h1>
 
-## Available Scripts
+<h3 align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=26&pause=1000&color=00FF00&center=true&vCenter=true&width=600&lines=Frontend+Developer;React+Enthusiast;UI%2FUX+Lover;Always+Learning" alt="Typing Animation" />
+</h3>
 
-In the project directory, you can run:
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=aayush&color=00FF00&style=flat-square" alt="Profile Views" />
+</p>
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🌗 Dark & Light Mode
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This portfolio comes with a **smooth dark/light mode toggle**.  
+The theme is **persistent** and applies to all sections seamlessly.  
 
-### `npm test`
+<p align="center">
+  <img src="https://media.giphy.com/media/l4pTfx2qLszoacZRS/giphy.gif" width="400px"/>
+</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠 Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Frontend
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Tools & Backend
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🚀 Features
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Fully responsive and modern UI  
+- Smooth **dark/light mode toggle**  
+- Persistent theme with **localStorage**  
+- Clean code with React functional components  
+- Animations for **section transitions and hover effects**  
+- Google Fonts `Playpen Sans` applied globally  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
+## 📂 Folder Structure
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+src/
+├── components/ # All reusable components
+│ └── ThemeToggle.jsx
+├── About/ # About section
+├── Contact/ # Contact form
+├── Home/ # Landing page
+├── Work/ # Projects section
+├── App.js
+├── index.js
+├── index.css # Global styles + theme variables
+└── assets/ # Images, icons, GIFs
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 📊 GitHub Stats
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=aayush&show_icons=true&theme=radical" width="400"/>
+  <br/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=aayush&theme=radical" width="400"/>
+</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🌐 Connect with Me
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<p align="center">
+  <a href="https://www.linkedin.com/in/lifeline024/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
+  </a>
+  <a href="https://github.com/lifeline024/" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
+  </a>
+  <a href="mailto:rajaayush931@gmail.com" target="_blank">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
+  </a>
+</p>
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<p align="center">
+  ⭐ Thanks for visiting! Let's build something amazing together! ⭐
+</p>
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📂 Folder Structure
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
