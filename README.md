@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzZ5Y2F5dG5yY2Z2eWZ6eGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dGZ5dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hvRJCLFzcasrR4ia7z/giphy.gif" width="60px" />
-</p>
-
 <h1 align="center">Ayushyaa Portfolio</h1>
 
 <h3 align="center">
@@ -11,18 +7,6 @@
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=aayush&color=00FF00&style=flat-square" alt="Profile Views" />
 </p>
-
----
-
-## 🌗 Dark & Light Mode
-
-This portfolio comes with a **smooth dark/light mode toggle**.  
-The theme is **persistent** and applies to all sections seamlessly.  
-
-<p align="center">
-  <img src="https://media.giphy.com/media/l4pTfx2qLszoacZRS/giphy.gif" width="400px"/>
-</p>
-
 ---
 
 ## 🛠 Tech Stack
@@ -80,10 +64,10 @@ src/
 ## 🌐 Connect with Me
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/lifeline024/" target="_blank">
+  <a href="https://www.linkedin.com/in/krushayu/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
   </a>
-  <a href="https://github.com/lifeline024/" target="_blank">
+  <a href="https://github.com/krushayu/" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
   </a>
   <a href="mailto:rajaayush931@gmail.com" target="_blank">
@@ -96,7 +80,4 @@ src/
 <p align="center">
   ⭐ Thanks for visiting! Let's build something amazing together! ⭐
 </p>
-
-
-## 📂 Folder Structure
 
