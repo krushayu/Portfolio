@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import "./contact.css";
-import { FaGithub, FaLinkedin, FaBlog } from "react-icons/fa";
+// import { FaGithub, FaLinkedin, FaBlog } from "react-icons/fa";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -174,11 +174,11 @@ const Contact = () => {
     },
   ];
 
-  const socialLinks = {
-    github: "/comingsoon",
-    linkedin: "/comingsoon",
-    blogs: "/comingsoon",
-  };
+  // const socialLinks = {
+  //   github: "/comingsoon",
+  //   linkedin: "/comingsoon",
+  //   blogs: "/comingsoon",
+  // };
 
   return (
     <div className="portfolio-contact">
@@ -278,7 +278,7 @@ const Contact = () => {
               </div>
 
               {/* Social Links */}
-              <div className="section-card">
+              {/* <div className="section-card">
                 <div className="section-header">
                   <div className="section-icon">🔗</div>
                   <h3 className="section-title">EXPLORE</h3>
@@ -306,10 +306,10 @@ const Contact = () => {
                     </a>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               {/* Availability */}
-              <div className="section-card">
+              {/* <div className="section-card">
                 <div className="section-header">
                   <div className="section-icon">⏰</div>
                   <h3 className="section-title">AVAILABILITY</h3>
@@ -332,7 +332,7 @@ const Contact = () => {
                     <div className="availability-value">9 AM - 6 PM IST</div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Right Column - Contact Form */}
