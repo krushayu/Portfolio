@@ -227,12 +227,12 @@ const About = () => {
                     </ul> */}
                     <div className="documents">
                       <a
-                        href="https://drive.google.com/file/d/1Kjc6WUJkY7jOyjyRfHxwyD_M71S5trSv/view?usp=drive_link"
+                        href="https://digisamaksh-my.sharepoint.com/:i:/p/hr/IQDe8UasDwAxSoxC1pfeeznUASpYO2dVt5Ticr2CVY0v22g?e=WDT9Gd​"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="document-link"
                       >
-                        View Offer Letter
+                        View Certificate
                       </a>
                     </div>
                   </div>
