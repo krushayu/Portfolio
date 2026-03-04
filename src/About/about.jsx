@@ -218,7 +218,7 @@ const About = () => {
                         <h4 className="company">DIGISAMAKSH</h4>
                         <span className="role">Web Developer</span>
                       </div>
-                      <span className="duration">June 2025 – Present</span>
+                      <span className="duration">June 2025 – August 2025</span>
                     </div>
                     {/* <ul className="experience-points">
                       <li>Working on real-world web applications</li>
