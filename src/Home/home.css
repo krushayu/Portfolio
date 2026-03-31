@@ -4,7 +4,7 @@
   min-height: 100vh;
   background: #000000;
   color: #ffffff;
-  overflow: hidden;
+  overflow: auto;
   font-family: 'Caveat', cursive;
 }
 

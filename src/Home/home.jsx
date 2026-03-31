@@ -380,7 +380,7 @@ const Home = () => {
             <span className="scroll-text">Explore</span>
           </div> */}
         </footer>
-        <p>&copy; 2025 Aayushya Shrivastava</p>
+        <p>&copy; 2026 Aayushya Shrivastava</p>
       </div>
     </div>
   );

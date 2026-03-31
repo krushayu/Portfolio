@@ -127,7 +127,7 @@ const About = () => {
                 <div className="name-title-container">
                   <h1>Aayush Shrivastava</h1>
                   <div className="tagline">
-                    <span className="hashtag">#AyushyaSignature</span>
+                    <span className="hashtag">knowledge creates fear..</span>
                   </div>
                   <div className="location">
                     <span className="location-icon">📍</span>
@@ -375,7 +375,7 @@ const About = () => {
 
         <footer className="about-footer">
           <div className="footer-content">
-            <div className="signature">&copy; 2025 Aayushya Shrivastava</div>
+            <div className="signature">&copy; 2026 Aayushya Shrivastava</div>
             <div className="footer-links">
               <Link to="/" className="footer-link">
                 Home

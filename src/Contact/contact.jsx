@@ -483,7 +483,7 @@ const Contact = () => {
 
         <footer className="contact-footer">
           <div className="footer-content">
-            <div className="signature">&copy; 2025 Aayushya Shrivastava</div>
+            <div className="signature">&copy; 2026 Aayushya Shrivastava</div>
             <div className="footer-links">
               <Link to="/" className="footer-link">
                 Home

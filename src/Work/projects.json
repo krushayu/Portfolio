@@ -7,6 +7,35 @@
       "color": "#3B82F6",
       "projects": [
         {
+          "id": 5,
+          "title": "YamGram – Real-Time Social Chat & Media Web App",
+          "year": "2026",
+          "month": "March",
+          "description": "YamGram is a real-time social web application that enables users to chat, share media, and interact seamlessly. It is built with a scalable backend and optimized architecture for real-time communication.",
+          "technologies": [
+            "Node.js",
+            "Express.js",
+            "MongoDB",
+            "Socket.io",
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Render"
+          ],
+          "features": [
+            "Real-time chat system",
+            "User authentication",
+            "REST API backend",
+            "MongoDB database integration",
+            "Web-based camera access",
+            "Snapchat-style lens concept (in progress)",
+            "Live cloud deployment"
+          ],
+          "liveLink": "https://yamgram.onrender.com",
+          "githubLink": "#",
+          "status": "🚧 In Progress"
+        },
+        {
           "id": 4,
           "title": "Personal React Portfolio Website",
           "year": "2025",
@@ -97,6 +126,42 @@
           "liveLink": "http://health-hub-cutm-pkd.vercel.app/",
           "githubLink": "https://github.com/ayushyaa/HealthHub",
           "status": "🏆 Hackathon Winner"
+        }
+      ]
+    },
+    {
+      "id": "ai-ml",
+      "name": "AI / ML",
+      "icon": "🤖",
+      "color": "#EC4899",
+      "projects": [
+        {
+          "id": 1,
+          "title": "AI-Based Group Discussion Analyzer",
+          "year": "2026",
+          "month": "February",
+          "description": "An AI-powered web application that analyzes group discussions by evaluating participants' speech, content, and behavior. It provides insights such as speaking time, confidence level, sentiment, and overall performance to help users improve communication skills.",
+          "technologies": [
+            "Python",
+            "Node.js",
+            "Speech Recognition API",
+            "NLP",
+            "Machine Learning",
+            "HTML",
+            "CSS",
+            "JavaScript"
+          ],
+          "features": [
+            "Real-time speech-to-text conversion",
+            "Participant-wise speaking time tracking",
+            "Sentiment & tone analysis",
+            "AI-based performance scoring",
+            "Keyword and content analysis",
+            "Report generation for each participant"
+          ],
+          "liveLink": "#",
+          "githubLink": "#",
+          "status": "🚧 In Progress"
         }
       ]
     },

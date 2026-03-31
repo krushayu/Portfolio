@@ -1,9 +1,9 @@
 body {
   margin: 0;
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Caveat', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  user-select: none;
+  /* user-select: none; */
 }
 
 code {
