@@ -373,6 +373,29 @@ const About = () => {
           </div>
         </main>
 
+        {/* Resume Download Section */}
+        <div className="resume-section">
+          <div className="resume-card">
+            <div className="resume-content">
+              <div className="resume-icon">📄</div>
+              <div className="resume-text">
+                <h3 className="resume-title">Download My Resume</h3>
+                <p className="resume-subtitle">Get a detailed overview of my experience and skills</p>
+              </div>
+            </div>
+            <a 
+              href="/Resume_Aayush.pdf" 
+              download="Resume_Aayush.pdf"
+              className="resume-download-btn"
+            >
+              <span className="btn-text">Download Resume</span>
+              <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
         <footer className="about-footer">
           <div className="footer-content">
             <div className="signature">&copy; 2026 Aayushya Shrivastava</div>
