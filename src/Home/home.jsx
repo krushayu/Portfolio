@@ -306,6 +306,11 @@ const Home = () => {
                     <div className="overlay-line"></div>
                     <div className="overlay-line"></div>
                   </div>
+                  {/* Open to Work Tag */}
+                  <div className="open-to-work-tag">
+                    <span className="tag-dot"></span>
+                    <span className="tag-text">Open to Work</span>
+                  </div>
                 </div>
                 <div className="portrait-outline"></div>
                 <div className="portrait-glow"></div>
