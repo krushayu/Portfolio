@@ -1,0 +1,44 @@
+{
+  "certifications": [
+    {
+      "title": "Gemini Certified University Student",
+      "issuer": "Google",
+      "link": "https://edu.google.accredible.com/a7654f76-353b-4ab3-b867-b38a351c7fc3#acc.ITSuOAVX"
+    },
+    {
+      "title": "GeeksForGeeks - CUTM Training Program",
+      "issuer": "GeeksForGeeks",
+      "link": "https://media.geeksforgeeks.org/courses/certificates/d4427cb85f95a689d3df0480d8af3a33.pdf"
+    },
+    {
+      "title": "Angular Web Developer Certification",
+      "issuer": "Infosys",
+      "link": "https://media.licdn.com/dms/image/v2/D561FAQElIjCvv_1aQA/feedshare-document-images_480/B56Z14re0lGoAg-/2/1775846158884?e=1776902400&v=beta&t=ZM6vh54NV7QU7FSFdQ_YhF-VaccUiuqZr9kKt_yQDLw"
+    },
+    {
+      "title": "Angular Certification",
+      "issuer": "Infosys",
+      "link": "https://media.licdn.com/dms/image/v2/D561FAQElIjCvv_1aQA/feedshare-document-cover-images_1920/B56Z14re0lGoBQ-/0/1775846159374?e=1776495600&v=beta&t=144izhqzZGGtFohqVpd0IuW3zIbhKt_YtTEGsg2WbUo"
+    }
+  ],
+  "achievements": [
+    {
+      "title": "🏆 Eco Smart Hackathon 2025 Winner",
+      "badge": "1st Place",
+      "description": "Won 1st place for developing HealthHub — A Health Data Management Web App with appointment booking and doctor consultation features.",
+      "projectLink": "http://health-hub-cutm-pkd.vercel.app/",
+      "projectName": "HealthHub",
+      "tags": ["HealthTech", "Web App", "Real-time"],
+      "eventLink": "https://media.licdn.com/dms/image/v2/D4D22AQFTkc3SovHiqg/feedshare-shrink_800/B4DZWoP87TG4Ag-/0/1742284515056?e=1768435200&v=beta&t=_Ziq5o0Usgneggf7q2mkB2u_AqIVYs6GlfOhL-3kigU"
+    },
+    {
+      "title": "Successful Deliver IEEE Scopes Conference Website to CUTM",
+      "badge": "https://img.icons8.com/?size=100&id=52150&format=png&color=000000",
+      "description": "Won 1st place for developing HealthHub — A Health Data Management Web App with appointment booking and doctor consultation features.",
+      "projectLink": "http://scopes-2027.onrender.com",
+      "projectName": "Scopes Conference Website 2027",
+      "tags": [],
+      "eventLink": "https://media.licdn.com/dms/image/v2/D4D22AQFTkc3SovHiqg/feedshare-shrink_800/B4DZWoP87TG4Ag-/0/1742284515056?e=1768435200&v=beta&t=_Ziq5o0Usgneggf7q2mkB2u_AqIVYs6GlfOhL-3kigU"
+    }
+  ]
+}

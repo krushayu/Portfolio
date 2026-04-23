@@ -105,6 +105,8 @@ const Home = () => {
           ctx.rect(-size / 2, -size / 2, size, size);
           ctx.stroke();
           break;
+        default:
+          break;
       }
       ctx.restore();
     };

@@ -1,12 +1,71 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./about.css";
 import profileImg from "../assest/profile.jpg";
+import pData from "./portfolioData.json";
+
+const { certifications, achievements } = pData;
+
+const AchievementItem = ({ ach }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`ach-item ${open ? 'open' : ''}`}>
+      <button className="ach-header" onClick={() => setOpen(!open)}>
+        <div className="ach-header-left">
+          {ach.badge && ach.badge.startsWith('http')
+            ? <img src={ach.badge} alt="badge" className="ach-badge-icon" />
+            : null}
+          <span className="ach-title">{ach.title}</span>
+        </div>
+        <span className="ach-arrow">{open ? 'â–²' : 'â–¼'}</span>
+      </button>
+      {open && (
+        <div className="ach-body">
+          <p className="ach-desc">
+            <a href={ach.projectLink} target="_blank" rel="noopener noreferrer" className="ach-project-link">{ach.projectName} â€” </a>
+            {ach.description}
+          </p>
+          {ach.tags && ach.tags.length > 0 && (
+            <div className="ach-tags">
+              {ach.tags.map((tag, j) => <span className="tag" key={j}>{tag}</span>)}
+            </div>
+          )}
+          <a href={ach.eventLink} target="_blank" rel="noopener noreferrer" className="ach-event-link">
+            View Event â†—
+          </a>
+        </div>
+      )}
+    </div>
+  );
+};
+
+
+const LINES = [
+  "Code. Create. Break. Learn. Repeat.",
+];
 
 const About = () => {
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
   const animationFrameRef = useRef(null);
+  const [typed, setTyped] = useState("");
+
+  useEffect(() => {
+    let charIdx = 0;
+    let pausing = false;
+    let pauseCount = 0;
+    const interval = setInterval(() => {
+      if (pausing) {
+        pauseCount++;
+        if (pauseCount >= 13) { pausing = false; pauseCount = 0; charIdx = 0; }
+        return;
+      }
+      charIdx++;
+      setTyped(LINES[0].slice(0, charIdx));
+      if (charIdx >= LINES[0].length) pausing = true;
+    }, 60);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -21,44 +80,70 @@ const About = () => {
     const initParticles = () => {
       particlesRef.current = [];
       const particleCount = Math.min(
-        40,
-        Math.floor((canvas.width * canvas.height) / 30000)
+        60,
+        Math.floor((canvas.width * canvas.height) / 20000)
       );
 
       for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 1 + 0.5,
-          speedX: (Math.random() - 0.5) * 0.15,
-          speedY: (Math.random() - 0.5) * 0.15,
-          opacity: Math.random() * 0.05 + 0.02,
+          size: Math.random() * 2 + 0.5,
+          speedX: (Math.random() - 0.5) * 0.2,
+          speedY: (Math.random() - 0.5) * 0.2,
+          opacity: Math.random() * 0.08 + 0.02,
+          originalX: Math.random() * canvas.width,
+          originalY: Math.random() * canvas.height,
+          angle: Math.random() * Math.PI * 2,
         });
       }
     };
 
+    let time = 0;
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Dark background
-      ctx.fillStyle = "#000000";
+      // Gradient background
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, "#0a0a0a");
+      gradient.addColorStop(1, "#000000");
+      ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Update and draw particles
-      particlesRef.current.forEach((particle) => {
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
+      time += 0.005;
 
-        // Wrap around screen
+      // Update and draw particles with gentle wave motion
+      particlesRef.current.forEach((particle) => {
+        // Add subtle wave motion
+        const waveX = Math.sin(time + particle.originalY * 0.01) * 0.3;
+        const waveY = Math.cos(time + particle.originalX * 0.01) * 0.3;
+
+        particle.x += particle.speedX + waveX;
+        particle.y += particle.speedY + waveY;
+
+        // Wrap around with smooth transition
         if (particle.x > canvas.width) particle.x = 0;
         if (particle.x < 0) particle.x = canvas.width;
         if (particle.y > canvas.height) particle.y = 0;
         if (particle.y < 0) particle.y = canvas.height;
 
-        // Draw particle
+        // Draw particle with glow effect
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+        
+        // Radial gradient for glow
+        const gradient = ctx.createRadialGradient(
+          particle.x, particle.y, 0,
+          particle.x, particle.y, particle.size * 2
+        );
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${particle.opacity * 1.5})`);
+        gradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size * 0.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity * 1.2})`;
         ctx.fill();
       });
 
@@ -81,8 +166,10 @@ const About = () => {
     <div className="about-page">
       <canvas ref={canvasRef} className="background-canvas" />
 
+      {/* Main Content */}
       <div className="content-wrapper">
-        <header className="about-header">
+        {/* Header */}
+        <header className="portfolio-header">
           <div className="logo">
             <Link to="/" className="logo-link">
               <span className="logo-text">Ayush</span>
@@ -93,173 +180,184 @@ const About = () => {
             <Link to="/" className="nav-item">
               Home
             </Link>
-            <Link to="/about" className="nav-item active">
+            <Link to="/about" className="nav-item">
               About
             </Link>
             <Link to="/work" className="nav-item">
               Work
             </Link>
-            <Link to="/connect" className="nav-item">
+            <Link to="/contact" className="nav-item active">
               Contact
             </Link>
           </nav>
         </header>
 
         <main className="about-content">
-          {/* Intro Section - Top Full Width */}
-          <div className="intro-section">
-            <div className="intro-content">
-              <div className="name-image-container">
-                <div className="image-container">
-                  <div className="profile-image-placeholder">
-                    <div className="image-frame">
-                      <div className="image-overlay">
-                        <img
-                          src={profileImg}
-                          alt="Aayushya Shrivastava"
-                          className="profile-image"
-                        />
-                      </div>
-                    </div>
-                    <div className="image-glow"></div>
-                  </div>
-                </div>
-                <div className="name-title-container">
-                  <h1>Aayush Shrivastava</h1>
-                  <div className="tagline">
-                    <span className="hashtag">knowledge creates fear..</span>
-                  </div>
-                  <div className="location">
-                    <span className="location-icon">📍</span>
-                    <span className="location-text">
-                      Paralakhemundi, Odisha, India
-                    </span>
+          {/* Hero Section */}
+          <div className="hero-section">
+            {/* <div className="hero-badge">
+              <span className="badge-dot"></span>
+              <span className="badge-text">Software Developer</span>
+            </div> */}
+            
+            <div className="hero-main">
+              <div className="hero-image-wrapper">
+                <div className="hero-image-container">
+                  <div className="image-glow-ring"></div>
+                  <div className="hero-image-frame">
+                    <img src={profileImg} alt="Aayushya Shrivastava" className="hero-image" />
                   </div>
                 </div>
               </div>
+              
+              <div className="hero-info">
+                <h1 className="hero-name">
+                  Aayush <span className="name-accent">Shrivastava</span>
+                </h1>
+                <div className="hero-tagline">
+                  <span className="tagline-quote">"</span>
+                  knowledge creates fear..
+                  <span className="tagline-quote">"</span>
+                </div>
+                <div className="hero-location">
+                  <svg className="location-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                    <circle cx="12" cy="9" r="2.5" />
+                  </svg>
+                  <span>Paralakhemundi, Odisha, India</span>
+                </div>
+              </div>
+            </div>
 
-              <div className="intro-description">
-                <p className="description-text">
-                  I believe in one simple cycle:{" "}
-                  <span className="highlight">
-                    Code. Create. Break. Learn. Repeat.
-                  </span>
-                  That's how I grow - both as a developer and as a problem
-                  solver.
-                </p>
-                <p className="description-text">
-                  Currently pursuing B.Tech in Computer Science & Engineering
-                  with a passion for software development, logical
-                  problem-solving and building scalable digital solutions. I
-                  enjoy transforming ideas into practical, cleanly implemented
-                  products.
-                </p>
-              </div>
+            <div className="hero-description">
+              <p className="description-primary">
+                I believe in one simple cycle:{" "}
+                <span className="highlight-gradient">{typed}<span className="type-cursor">{typed.length < LINES[0].length ? "|" : ""}</span></span>
+              </p>
+              <p className="description-secondary">
+                Currently pursuing B.Tech in Computer Science &amp; Engineering
+                with a passion for software development, logical problem-solving
+                and building scalable digital solutions. I enjoy transforming
+                ideas into practical, cleanly implemented products.
+              </p>
             </div>
           </div>
 
-          {/* Two Column Layout for Details */}
-          <div className="details-sections">
+          {/* Content Grid */}
+          <div className="content-grid">
             {/* Left Column */}
-            <div className="left-column">
-              {/* Education Section */}
+            <div className="grid-column">
+              {/* Education */}
               <div className="section-card">
                 <div className="section-header">
-                  <div className="section-icon">🎓</div>
-                  <h3 className="section-title">EDUCATION</h3>
+                  <div className="section-icon-wrapper">
+                    <svg className="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M12 3L1 9l11 6 11-6-11-6z" />
+                      <path d="M5 13v5l7 3 7-3v-5" />
+                    </svg>
+                  </div>
+                  <h3 className="section-title">Education</h3>
                 </div>
 
-                <div className="education-list">
-                  <div className="education-item">
-                    <div className="education-header">
-                      <h4 className="institution">
-                        Centurion University of Technology and Management
-                      </h4>
-                      <span className="education-duration">2023 – 2027</span>
+                <div className="timeline">
+                  <div className="timeline-item">
+                    <div className="timeline-dot"></div>
+                    <div className="timeline-content">
+                      <div className="timeline-header">
+                        <h4 className="timeline-title">Centurion University</h4>
+                        <span className="timeline-date">2023 â€“ 2027</span>
+                      </div>
+                      <p className="timeline-subtitle">B.Tech â€” Computer Science</p>
                     </div>
-                    <p className="degree">
-                      Bachelor of Technology (B.Tech) — Computer Science
-                    </p>
                   </div>
 
-                  <div className="education-item">
-                    <div className="education-header">
-                      <h4 className="institution">
-                        Ram Dayalu Singh College, Muzaffarpur
-                      </h4>
-                      <span className="education-duration">2023</span>
+                  <div className="timeline-item">
+                    <div className="timeline-dot"></div>
+                    <div className="timeline-content">
+                      <div className="timeline-header">
+                        <h4 className="timeline-title">Ram Dayalu Singh College</h4>
+                        <span className="timeline-date">2023</span>
+                      </div>
+                      <p className="timeline-subtitle">Intermediate In Science</p>
                     </div>
-                    <p className="degree">Intermediate In Science</p>
                   </div>
 
-                  <div className="education-item">
-                    <div className="education-header">
-                      <h4 className="institution">
-                        G.N. High School, Chandanpatti
-                      </h4>
-                      <span className="education-duration">2021</span>
+                  <div className="timeline-item">
+                    <div className="timeline-dot"></div>
+                    <div className="timeline-content">
+                      <div className="timeline-header">
+                        <h4 className="timeline-title">G.N. High School</h4>
+                        <span className="timeline-date">2021</span>
+                      </div>
+                      <p className="timeline-subtitle">Matriculation</p>
                     </div>
-                    <p className="degree">Matriculation</p>
                   </div>
                 </div>
               </div>
 
-              {/* Experience Section */}
+              {/* Experience */}
               <div className="section-card">
                 <div className="section-header">
-                  <div className="section-icon">💼</div>
-                  <h3 className="section-title">EXPERIENCE</h3>
+                  <div className="section-icon-wrapper">
+                    <svg className="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <rect x="2" y="7" width="20" height="14" rx="2" />
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    </svg>
+                  </div>
+                  <h3 className="section-title">Experience</h3>
                 </div>
 
                 <div className="experience-list">
-                  <div className="experience-item">
+                  <div className="experience-card">
                     <div className="experience-header">
-                      <div className="company-info">
-                        <h4 className="company">DIGISAMAKSH</h4>
-                        <span className="role">Web Developer</span>
+                      <div>
+                        <h4 className="experience-company">DIGISAMAKSH</h4>
+                        <p className="experience-role">Web Developer</p>
                       </div>
-                      <span className="duration">June 2025 – August 2025</span>
+                      <span className="experience-duration">June 2025 â€“ Aug 2025</span>
                     </div>
-                    {/* <ul className="experience-points">
-                      <li>Working on real-world web applications</li>
-                      <li>Developing responsive, scalable user interfaces</li>
-                      <li>Collaborating on backend logic and integrations</li>
-                    </ul> */}
-                    <div className="documents">
+                    <div className="experience-documents">
                       <a
-                        href="https://digisamaksh-my.sharepoint.com/:i:/p/hr/IQDe8UasDwAxSoxC1pfeeznUASpYO2dVt5Ticr2CVY0v22g?e=WDT9Gd​"
+                        href="https://digisamaksh-my.sharepoint.com/:i:/p/hr/IQDe8UasDwAxSoxC1pfeeznUASpYO2dVt5Ticr2CVY0v22g?e=WDT9Gdâ€‹"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="document-link"
+                        className="doc-link"
                       >
-                        View Certificate
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                          <polyline points="14 2 14 8 20 8" />
+                          <line x1="16" y1="13" x2="8" y2="13" />
+                          <line x1="16" y1="17" x2="8" y2="17" />
+                          <polyline points="10 9 9 9 8 9" />
+                        </svg>
+                        Certificate
                       </a>
                     </div>
                   </div>
 
-                  <div className="experience-item">
+                  <div className="experience-card">
                     <div className="experience-header">
-                      <div className="company-info">
-                        <h4 className="company">CodeAlpha</h4>
-                        <span className="role">Frontend Developer</span>
+                      <div>
+                        <h4 className="experience-company">CodeAlpha</h4>
+                        <p className="experience-role">Frontend Developer</p>
                       </div>
-                      <span className="duration">May 2025 – June 2025</span>
+                      <span className="experience-duration">May 2025 â€“ June 2025</span>
                     </div>
-                    {/* <ul className="experience-points">
-                      <li>Built modern, responsive frontend components</li>
-                      <li>Improved UI consistency and performance</li>
-                      <li>
-                        Gained hands-on experience with production-level
-                        workflows
-                      </li>
-                    </ul> */}
-                    <div className="documents">
+                    <div className="experience-documents">
                       <a
-                        href="https://media.licdn.com/dms/image/v2/D4D22AQEWmwpkmdd2Rg/feedshare-shrink_800/B4DZcq0HfvGUAg-/0/1748770001914?e=1768435200&v=beta&t=FEI1WOrMZpmqbGwOeZZatmg3a52IgXi-KZESppomXhc"
-                        className="document-link"
+                        href="https://media.licdn.com/dms/image/v2/D4D22AQEWmwpkmdd2Rg/feedshare-shrink_800/B4DZcq0HfvGUAg-/0/1748770001914?e=1777507200&v=beta&t=pFgReYce6Oi0G5pPsVSOmSboVl1EUDI4I7s7sApJ3YQ"
+                        className="doc-link"
                         target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        View Certificate
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                          <polyline points="14 2 14 8 20 8" />
+                          <line x1="16" y1="13" x2="8" y2="13" />
+                          <line x1="16" y1="17" x2="8" y2="17" />
+                          <polyline points="10 9 9 9 8 9" />
+                        </svg>
+                        Certificate
                       </a>
                     </div>
                   </div>
@@ -268,36 +366,40 @@ const About = () => {
             </div>
 
             {/* Right Column */}
-            <div className="right-column">
-              {/* Skills Section */}
+            <div className="grid-column">
+              {/* Skills */}
               <div className="section-card">
                 <div className="section-header">
-                  <div className="section-icon">🛠️</div>
-                  <h3 className="section-title">SKILLS & TECHNOLOGIES</h3>
+                  <div className="section-icon-wrapper">
+                    <svg className="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </div>
+                  <h3 className="section-title">Skills & Technologies</h3>
                 </div>
 
-                <div className="skills-grid">
-                  <div className="skill-category">
-                    <h4 className="category-title">Primary Stack</h4>
-                    <div className="skills-list">
-                      <div className="skill-item">MERN Stack</div>
-                      <div className="skill-item">Node.js</div>
-                      <div className="skill-item">Cloudinary Integration</div>
-                      <div className="skill-item">React.js</div>
-                      <div className="skill-item">MongoDB</div>
-                      <div className="skill-item">Express.js</div>
+                <div className="skills-container">
+                  <div className="skill-group">
+                    <h4 className="skill-group-title">Primary Stack</h4>
+                    <div className="skill-chips">
+                      <span className="skill-chip">MERN Stack</span>
+                      <span className="skill-chip">Node.js</span>
+                      <span className="skill-chip">React.js</span>
+                      <span className="skill-chip">MongoDB</span>
+                      <span className="skill-chip">Express.js</span>
+                      <span className="skill-chip">Cloudinary</span>
                     </div>
                   </div>
 
-                  <div className="skill-category">
-                    <h4 className="category-title">Core Strengths</h4>
-                    <div className="skills-list">
-                      <div className="skill-item">Full-Stack Development</div>
-                      <div className="skill-item">API Integration</div>
-                      <div className="skill-item">UI/UX Design</div>
-                      <div className="skill-item">Problem Solving</div>
-                      <div className="skill-item">Data Handling</div>
-                      <div className="skill-item">Clean Code</div>
+                  <div className="skill-group">
+                    <h4 className="skill-group-title">Core Strengths</h4>
+                    <div className="skill-chips">
+                      <span className="skill-chip">Full-Stack Dev</span>
+                      <span className="skill-chip">API Integration</span>
+                      <span className="skill-chip">UI/UX Design</span>
+                      <span className="skill-chip">Problem Solving</span>
+                      <span className="skill-chip">Clean Code</span>
                     </div>
                   </div>
                 </div>
@@ -306,91 +408,65 @@ const About = () => {
               {/* Certifications & Achievements */}
               <div className="section-card">
                 <div className="section-header">
-                  <div className="section-icon">🏆</div>
-                  <h3 className="section-title">
-                    CERTIFICATIONS & ACHIEVEMENTS
-                  </h3>
+                  <div className="section-icon-wrapper">
+                    <svg className="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="section-title">Certification & Achievements</h3>
                 </div>
 
                 <div className="achievements-list">
-                  <div className="achievement-item">
-                    <div className="achievement-header">
-                      <h4 className="achievement-title">
-                        Gemini Certified University Student
-                      </h4>
-                      <a
-                        href="https://edu.google.accredible.com/a7654f76-353b-4ab3-b867-b38a351c7fc3#acc.ITSuOAVX"
-                        className="certificate-link"
-                        target="_blank"
-                      >
-                        View Certificate
-                      </a>
-                    </div>
-                    <div className="achievement-header">
-                      <h4 className="achievement-title">
-                        GeeksForGeeks - CUTM Training Program
-                      </h4>
-                      <a
-                        href="https://media.geeksforgeeks.org/courses/certificates/d4427cb85f95a689d3df0480d8af3a33.pdf"
-                        className="certificate-link"
-                        target="_blank"
-                      >
-                        View Certificate
-                      </a>
+
+                  <div className="cert-section">
+                    <p className="cert-section-label">Certifications</p>
+                    <div className="cert-chips-scroll">
+                      {certifications.map((cert, i) => (
+                        <a key={i} href={cert.link} target="_blank" rel="noopener noreferrer" className="cert-chip">
+                          <span className="cert-chip-dot" />
+                          <span className="cert-chip-title">{cert.title}</span>
+                        </a>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="achievement-item">
-                    <div className="achievement-header">
-                      <h4 className="achievement-title">
-                        🏆Eco Smart Hackathon 2025 Winner
-                      </h4>
-                      <span className="achievement-badge">1st Place</span>
-                    </div>
-                    <p className="achievement-description">
-                      Won 1st place for developing <a href="http://health-hub-cutm-pkd.vercel.app/"target="_blank" rel="noopener noreferrer"style={{ textDecoration: "none", color: "white" }}>  <strong>HealthHUb - </strong></a>
-                      A Health Data Management Web App with appointment booking
-                      and doctor consultation features.
-                    </p>
-                    <div className="tags">
-                      <span className="tag">HealthTech</span>
-                      <span className="tag">Web App</span>
-                      <span className="tag">Real-time</span>
-                    </div>
-                    <div className="documents">
-                      <a
-                        href="https://media.licdn.com/dms/image/v2/D4D22AQFTkc3SovHiqg/feedshare-shrink_800/B4DZWoP87TG4Ag-/0/1742284515056?e=1768435200&v=beta&t=_Ziq5o0Usgneggf7q2mkB2u_AqIVYs6GlfOhL-3kigU"
-                        className="document-link"
-                        target="_blank"
-                      >
-                        View Event
-                      </a>
-                    </div>
+                  <div className="ach-section">
+                    <p className="cert-section-label">Achievements</p>
+                    {achievements.map((ach, i) => (
+                      <AchievementItem key={i} ach={ach} />
+                    ))}
                   </div>
+
                 </div>
               </div>
             </div>
           </div>
         </main>
 
-        {/* Resume Download Section */}
+        {/* Resume Section */}
         <div className="resume-section">
           <div className="resume-card">
-            <div className="resume-content">
-              <div className="resume-icon">📄</div>
-              <div className="resume-text">
-                <h3 className="resume-title">Download My Resume</h3>
-                <p className="resume-subtitle">Get a detailed overview of my experience and skills</p>
-              </div>
+            <div className="resume-icon-wrapper">
+              <svg className="resume-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+                <polyline points="10 9 9 9 8 9" />
+              </svg>
+            </div>
+            <div className="resume-text">
+              <h3 className="resume-title">Download My Resume</h3>
+              <p className="resume-subtitle">Get a detailed overview of my experience and skills</p>
             </div>
             <a 
               href="/Resume_Aayush.pdf" 
               download="Resume_Aayush.pdf"
-              className="resume-download-btn"
+              className="resume-btn"
             >
-              <span className="btn-text">Download Resume</span>
-              <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <span>Download Resume</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z" />
               </svg>
             </a>
           </div>
@@ -398,23 +474,15 @@ const About = () => {
 
         <footer className="about-footer">
           <div className="footer-content">
-            <div className="signature">&copy; 2026 Aayushya Shrivastava</div>
-            <div className="footer-links">
-              <Link to="/" className="footer-link">
-                Home
-              </Link>
-              <span className="separator">/</span>
-              <Link to="/about" className="footer-link">
-                About
-              </Link>
-              <span className="separator">/</span>
-              <Link to="/work" className="footer-link">
-                Work
-              </Link>
-              <span className="separator">/</span>
-              <Link to="/connect" className="footer-link">
-                Contact
-              </Link>
+            <div className="signature">Â© 2026 Aayushya Shrivastava</div>
+            <div className="footer-nav">
+              <Link to="/" className="footer-link">Home</Link>
+              <span className="footer-separator">/</span>
+              <Link to="/about" className="footer-link">About</Link>
+              <span className="footer-separator">/</span>
+              <Link to="/work" className="footer-link">Work</Link>
+              <span className="footer-separator">/</span>
+              <Link to="/connect" className="footer-link">Contact</Link>
             </div>
           </div>
         </footer>

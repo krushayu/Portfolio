@@ -446,9 +446,7 @@ const Contact = () => {
                             Thank you for reaching out. I've received your
                             message and will get back to you within 24 hours.
                           </p>
-                          <p className="success-note">
-                            A confirmation has been sent to your email.
-                          </p>
+                        
                         </div>
                       </div>
                     </div>
