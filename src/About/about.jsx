@@ -22,7 +22,7 @@ const AchievementItem = ({ ach }) => {
       {open && (
         <div className="ach-body">
           <p className="ach-desc">
-            <a href={ach.projectLink} target="_blank" rel="noopener noreferrer" className="ach-project-link">{ach.projectName} â€” </a>
+            <a href={ach.projectLink} target="_blank" rel="noopener noreferrer" className="ach-project-link">{ach.projectName} – </a>
             {ach.description}
           </p>
           {ach.tags && ach.tags.length > 0 && (
@@ -265,9 +265,9 @@ const About = () => {
                     <div className="timeline-content">
                       <div className="timeline-header">
                         <h4 className="timeline-title">Centurion University</h4>
-                        <span className="timeline-date">2023 â€“ 2027</span>
+                        <span className="timeline-date">2023 – 2027</span>
                       </div>
-                      <p className="timeline-subtitle">B.Tech â€” Computer Science</p>
+                      <p className="timeline-subtitle">B.Tech – Computer Science</p>
                     </div>
                   </div>
 
@@ -314,7 +314,7 @@ const About = () => {
                         <h4 className="experience-company">DIGISAMAKSH</h4>
                         <p className="experience-role">Web Developer</p>
                       </div>
-                      <span className="experience-duration">June 2025 â€“ Aug 2025</span>
+                      <span className="experience-duration">June 2025 – Aug 2025</span>
                     </div>
                     <div className="experience-documents">
                       <a
@@ -341,7 +341,7 @@ const About = () => {
                         <h4 className="experience-company">CodeAlpha</h4>
                         <p className="experience-role">Frontend Developer</p>
                       </div>
-                      <span className="experience-duration">May 2025 â€“ June 2025</span>
+                      <span className="experience-duration">May 2025 – June 2025</span>
                     </div>
                     <div className="experience-documents">
                       <a
