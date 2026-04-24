@@ -387,7 +387,19 @@ const Home = () => {
             <span className="scroll-text">Explore</span>
           </div> */}
         </footer>
-        <p>&copy; 2026 Aayushya Shrivastava</p>
+        <div className="footer-bottom">
+          <p className="copyright">&copy; 2026 Aayushya Shrivastava</p>
+          <div className="flag-counter-wrapper">
+            <p className="flag-label">VISITORS BY COUNTRY</p>
+            <a href="https://info.flagcounter.com/f8SJ" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://s01.flagcounter.com/count2/f8SJ/bg_111111/txt_AAAAAA/border_333333/columns_5/maxflags_10/viewers_0/labels_1/pageviews_1/flags_1/percent_0/"
+                alt="Flag Counter"
+                className="flag-counter-img"
+              />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

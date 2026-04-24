@@ -264,10 +264,10 @@ const About = () => {
                     <div className="timeline-dot"></div>
                     <div className="timeline-content">
                       <div className="timeline-header">
-                        <h4 className="timeline-title">Centurion University</h4>
+                        <h4 className="timeline-title">Centurion University of Technology and Management</h4>
                         <span className="timeline-date">2023 – 2027</span>
                       </div>
-                      <p className="timeline-subtitle">B.Tech – Computer Science</p>
+                      <p className="timeline-subtitle">Bachelor of Technology - Computer Science</p>
                     </div>
                   </div>
 

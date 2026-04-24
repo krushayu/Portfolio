@@ -154,26 +154,6 @@ const Contact = () => {
     }
   };
 
-  const contactMethods = [
-    {
-      platform: "Email",
-      value: "rajaayush931@gmail.com",
-      icon: "✉️",
-      link: "mailto:rajaayush931@gmail.com",
-    },
-    {
-      platform: "Phone",
-      value: "+91 8083030197",
-      icon: "📱",
-      link: "tel:+918083030197",
-    },
-    {
-      platform: "Location",
-      value: "Paralakhemundi, Odisha",
-      icon: "📍",
-    },
-  ];
-
   // const socialLinks = {
   //   github: "/comingsoon",
   //   linkedin: "/comingsoon",
@@ -234,109 +214,7 @@ const Contact = () => {
 
           {/* Two Column Layout */}
           <div className="contact-sections">
-            {/* Left Column - Contact Info */}
             <div className="left-column">
-              {/* Contact Methods */}
-              <div className="section-card">
-                <div className="section-header">
-                  <div className="section-icon">📞</div>
-                  <h3 className="section-title">CONTACT METHODS</h3>
-                </div>
-
-                <div className="contact-methods-grid">
-                  {contactMethods.map((method, index) => (
-                    <div key={index} className="contact-method-card">
-                      <div className="method-icon">{method.icon}</div>
-                      <div className="method-details">
-                        <h4 className="method-platform">{method.platform}</h4>
-                        {method.link ? (
-                          <a
-                            href={method.link}
-                            className="method-value"
-                            target={
-                              method.platform === "Email" ||
-                              method.platform === "Phone"
-                                ? "_self"
-                                : "_blank"
-                            }
-                            rel={
-                              method.platform === "Email" ||
-                              method.platform === "Phone"
-                                ? ""
-                                : "noopener noreferrer"
-                            }
-                          >
-                            {method.value}
-                          </a>
-                        ) : (
-                          <p className="method-value">{method.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Social Links */}
-              {/* <div className="section-card">
-                <div className="section-header">
-                  <div className="section-icon">🔗</div>
-                  <h3 className="section-title">EXPLORE</h3>
-                </div>
-
-                <div className="social-buttons">
-                  {Object.entries(socialLinks).map(([platform, url]) => (
-                    <a
-                      key={platform}
-                      href={url}
-                      className="social-button"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="social-button-icon">
-                        {platform === "github" && <FaGithub />}
-                        {platform === "linkedin" && <FaLinkedin />}
-                        {platform === "blogs" && <FaBlog />}
-                      </span>
-
-                      <span className="social-button-text">
-                        {platform.charAt(0).toUpperCase() + platform.slice(1)}
-                      </span>
-                      <span className="social-button-arrow">→</span>
-                    </a>
-                  ))}
-                </div>
-              </div> */}
-
-              {/* Availability */}
-              {/* <div className="section-card">
-                <div className="section-header">
-                  <div className="section-icon">⏰</div>
-                  <h3 className="section-title">AVAILABILITY</h3>
-                </div>
-
-                <div className="availability-info">
-                  <div className="availability-item">
-                    <div className="availability-label">Response Time</div>
-                    <div className="availability-value">Within 24 hours</div>
-                  </div>
-                  <div className="availability-item">
-                    <div className="availability-label">Status</div>
-                    <div className="availability-status">
-                      <span className="status-dot"></span>
-                      Available for projects
-                    </div>
-                  </div>
-                  <div className="availability-item">
-                    <div className="availability-label">Working Hours</div>
-                    <div className="availability-value">9 AM - 6 PM IST</div>
-                  </div>
-                </div>
-              </div> */}
-            </div>
-
-            {/* Right Column - Contact Form */}
-            <div className="right-column">
               <div className="section-card">
                 <div className="section-header">
                   <div className="section-icon">✍️</div>
@@ -454,7 +332,10 @@ const Contact = () => {
                 </form>
               </div>
 
-              {/* Google Maps Section */}
+            </div>
+
+            {/* Right Column - Map */}
+            <div className="right-column">
               <div className="section-card">
                 <div className="section-header">
                   <div className="section-icon">📍</div>
@@ -463,12 +344,8 @@ const Contact = () => {
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7553.683218262049!2d84.1376441!3d18.8052108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1766844388834!5m2!1sen!2sin"
                   width="100%"
-                  height="280"
-                  style={{
-                    border: 0,
-                    borderRadius: "14px",
-                    marginTop: "16px",
-                  }}
+                  height="400"
+                  style={{ border: 0, borderRadius: "14px", marginTop: "16px" }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
