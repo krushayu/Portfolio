@@ -17,7 +17,7 @@ const AchievementItem = ({ ach }) => {
             : null}
           <span className="ach-title">{ach.title}</span>
         </div>
-        <span className="ach-arrow">{open ? 'â–²' : 'â–¼'}</span>
+        <span className="ach-arrow">{open ? '▲' : '▼'}</span>
       </button>
       {open && (
         <div className="ach-body">
@@ -31,7 +31,7 @@ const AchievementItem = ({ ach }) => {
             </div>
           )}
           <a href={ach.eventLink} target="_blank" rel="noopener noreferrer" className="ach-event-link">
-            View Event â†—
+            View Event ↗
           </a>
         </div>
       )}
@@ -318,7 +318,7 @@ const About = () => {
                     </div>
                     <div className="experience-documents">
                       <a
-                        href="https://digisamaksh-my.sharepoint.com/:i:/p/hr/IQDe8UasDwAxSoxC1pfeeznUASpYO2dVt5Ticr2CVY0v22g?e=WDT9Gdâ€‹"
+                        href="https://digisamaksh-my.sharepoint.com/:i:/p/hr/IQDe8UasDwAxSoxC1pfeeznUASpYO2dVt5Ticr2CVY0v22g?e=WDT9Gd"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="doc-link"
@@ -474,7 +474,7 @@ const About = () => {
 
         <footer className="about-footer">
           <div className="footer-content">
-            <div className="signature">Â© 2026 Aayushya Shrivastava</div>
+            <div className="signature">© 2026 Aayushya Shrivastava</div>
             <div className="footer-nav">
               <Link to="/" className="footer-link">Home</Link>
               <span className="footer-separator">/</span>
