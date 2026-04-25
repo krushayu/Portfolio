@@ -75,7 +75,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi! I'm **krush@yu's Assist..** 👋\nAsk me about Aayush's portfolio — or anything simple like date, time, general questions!",
+      content: "Hi! I'm **krush@yu's Assist..**👋\nAsk me about Aayush's portfolio..",
     },
   ]);
   const [input, setInput] = useState("");
@@ -178,7 +178,7 @@ const Chatbot = () => {
       const data = await res.json();
       const transcript = data?.transcript || data?.text || "";
       if (transcript) {
-        setInput(transcript); // Show in input field, user can edit then send
+        await sendMessage(transcript);
       }
     } catch(e) {
       console.error("STT error:", e);
@@ -217,7 +217,7 @@ const Chatbot = () => {
           inputs: [cleanText],
           target_language_code: "en-IN",
           speaker: "anushka",
-          pace: 1.0,
+          pace: 0.75,
           pitch: 0,
           loudness: 1.5,
           speech_sample_rate: 22050,
@@ -336,20 +336,14 @@ const Chatbot = () => {
             <button
               className={`cb-mic ${recording ? "recording" : ""}`}
               onClick={recording ? stopRecording : startRecording}
-              title={recording ? "Stop recording" : "Voice input"}
+              title={recording ? "Tap to send" : "Hold to speak"}
             >
-              {recording ? (
-                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
-                  <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
-                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                  <line x1="12" y1="19" x2="12" y2="23"/>
-                  <line x1="8" y1="23" x2="16" y2="23"/>
-                </svg>
-              )}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
             </button>
 
             <textarea
