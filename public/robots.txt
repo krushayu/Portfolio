@@ -2,3 +2,16 @@ User-agent: *
 Allow: /
 
 Sitemap: https://krushayu.in/sitemap.xml
+
+# Allow all major crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /

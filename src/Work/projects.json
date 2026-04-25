@@ -31,9 +31,9 @@
             "Snapchat-style lens concept (in progress)",
             "Live cloud deployment"
           ],
-          "liveLink": "https://yamgram.onrender.com",
+          "liveLink": "#",
           "githubLink": "#",
-          "status": "🚧 In Progress"
+          "status": "✅ Completed"
         },
         {
           "id": 4,
@@ -160,8 +160,8 @@
             "Report generation for each participant"
           ],
           "liveLink": "#",
-          "githubLink": "#",
-          "status": "🚧 In Progress"
+          "githubLink": "https://github.com/krushayu/Ai-GD-Analyzer",
+          "status": "✅ Completed"
         }
       ]
     },
@@ -257,7 +257,7 @@
           ],
           "liveLink": "#",
           "githubLink": "https://github.com/krushayu/Block-Chain-Medical-Data-Storage",
-          "status": "🚧 In Progress"
+          "status": "✅ Completed"
         }
       ]
     }
