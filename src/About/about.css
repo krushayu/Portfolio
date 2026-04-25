@@ -40,29 +40,67 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
-.about-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; margin-bottom: 4rem; }
+  padding: 1.5rem 0;
+  margin-bottom: 4rem;
+}
 
-.logo { display: flex; align-items: center; gap: 1rem; }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
-.logo-text { font-size: 1.8rem; font-weight: 700; color: #ffffff; letter-spacing: 0.1em; }
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: inherit;
+}
 
-.logo-line { width: 40px; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent); }
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+}
 
-.navigation { display: flex; gap: 3rem; }
+.logo-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+}
 
-.nav-item { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; position: relative; padding: 0.5rem 0; transition: color 0.3s ease; }
+.navigation {
+  display: flex;
+  gap: 3rem;
+}
 
-.nav-item::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent); transition: width 0.3s ease; }
+.nav-item {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+  transition: width 0.3s ease;
+}
 
 .nav-item:hover { color: #ffffff; }
-
 .nav-item:hover::after { width: 100%; }
-
 .nav-item.active { color: #ffffff; }
-
-}
+.nav-item.active::after { width: 100%; }
 
 .hero-badge {
   display: inline-flex;

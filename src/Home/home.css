@@ -748,3 +748,6 @@ position: absolute;
   border: none;
   outline: none;
 }
+
+.nav-item.active { color: #ffffff; }
+.nav-item.active::after { width: 100%; }

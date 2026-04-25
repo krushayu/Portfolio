@@ -1,251 +1,63 @@
 import { useEffect, useRef } from "react";
 import "./home.css";
 import profileImg from "../assest/profile.jpg";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const Home = () => {
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
   const animationFrameRef = useRef(null);
-  const mousePosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    // Set canvas dimensions
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       initBackground();
     };
 
-    // Initialize geometric background
     const initBackground = () => {
-      // Clear existing particles
       particlesRef.current = [];
-
-      // Create grid lines
-      for (let i = 0; i < 50; i++) {
+      const count = Math.min(40, Math.floor((canvas.width * canvas.height) / 30000));
+      for (let i = 0; i < count; i++) {
         particlesRef.current.push({
-          type: "grid",
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 1.5 + 0.5,
-          speed: Math.random() * 0.5 + 0.1,
-          opacity: Math.random() * 0.1 + 0.05,
-        });
-      }
-
-      // Create floating geometric shapes
-      for (let i = 0; i < 20; i++) {
-        particlesRef.current.push({
-          type: "shape",
-          shape: ["circle", "triangle", "square"][
-            Math.floor(Math.random() * 3)
-          ],
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 80 + 20,
-          rotation: Math.random() * Math.PI * 2,
-          speedX: (Math.random() - 0.5) * 0.2,
-          speedY: (Math.random() - 0.5) * 0.2,
-          opacity: Math.random() * 0.08 + 0.02,
-          rotationSpeed: (Math.random() - 0.5) * 0.01,
-        });
-      }
-
-      // Create subtle particles
-      for (let i = 0; i < 100; i++) {
-        particlesRef.current.push({
-          type: "particle",
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 2 + 0.5,
-          speedX: (Math.random() - 0.5) * 0.3,
-          speedY: (Math.random() - 0.5) * 0.3,
-          opacity: Math.random() * 0.2 + 0.05,
-          pulseSpeed: Math.random() * 0.02 + 0.01,
+          size: Math.random() * 1 + 0.5,
+          speedX: (Math.random() - 0.5) * 0.15,
+          speedY: (Math.random() - 0.5) * 0.15,
+          opacity: Math.random() * 0.05 + 0.02,
         });
       }
     };
 
-    // Mouse tracking
-    const handleMouseMove = (e) => {
-      mousePosRef.current = {
-        x: e.clientX,
-        y: e.clientY,
-      };
-    };
-
-    // Draw geometric shapes
-    const drawShape = (ctx, shape, x, y, size, rotation, opacity) => {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(rotation);
-      ctx.globalAlpha = opacity;
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
-      ctx.lineWidth = 1;
-
-      switch (shape) {
-        case "circle":
-          ctx.beginPath();
-          ctx.arc(0, 0, size / 2, 0, Math.PI * 2);
-          ctx.stroke();
-          break;
-        case "triangle":
-          ctx.beginPath();
-          ctx.moveTo(0, -size / 2);
-          ctx.lineTo(size / 2, size / 2);
-          ctx.lineTo(-size / 2, size / 2);
-          ctx.closePath();
-          ctx.stroke();
-          break;
-        case "square":
-          ctx.beginPath();
-          ctx.rect(-size / 2, -size / 2, size, size);
-          ctx.stroke();
-          break;
-        default:
-          break;
-      }
-      ctx.restore();
-    };
-
-    // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw subtle gradient overlay
-      const gradient = ctx.createRadialGradient(
-        canvas.width / 2,
-        canvas.height / 2,
-        0,
-        canvas.width / 2,
-        canvas.height / 2,
-        Math.max(canvas.width, canvas.height) / 2
-      );
-      gradient.addColorStop(0, "rgba(0, 0, 0, 0)");
-      gradient.addColorStop(1, "rgba(0, 0, 0, 0.7)");
-      ctx.fillStyle = gradient;
+      ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Update and draw particles
-      particlesRef.current.forEach((particle, index) => {
-        if (particle.type === "grid") {
-          // Grid lines
-          ctx.beginPath();
-          ctx.moveTo(particle.x, 0);
-          ctx.lineTo(particle.x, canvas.height);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${particle.opacity})`;
-          ctx.lineWidth = particle.size;
-          ctx.stroke();
-
-          particle.x += particle.speed;
-          if (particle.x > canvas.width) particle.x = 0;
-
-          ctx.beginPath();
-          ctx.moveTo(0, particle.y);
-          ctx.lineTo(canvas.width, particle.y);
-          ctx.stroke();
-
-          particle.y += particle.speed;
-          if (particle.y > canvas.height) particle.y = 0;
-        } else if (particle.type === "shape") {
-          // Geometric shapes
-          drawShape(
-            ctx,
-            particle.shape,
-            particle.x,
-            particle.y,
-            particle.size,
-            particle.rotation,
-            particle.opacity
-          );
-
-          particle.x += particle.speedX;
-          particle.y += particle.speedY;
-          particle.rotation += particle.rotationSpeed;
-
-          // Wrap around screen
-          if (particle.x > canvas.width + particle.size)
-            particle.x = -particle.size;
-          if (particle.x < -particle.size)
-            particle.x = canvas.width + particle.size;
-          if (particle.y > canvas.height + particle.size)
-            particle.y = -particle.size;
-          if (particle.y < -particle.size)
-            particle.y = canvas.height + particle.size;
-        } else if (particle.type === "particle") {
-          // Particles with mouse interaction
-          const dx = mousePosRef.current.x - particle.x;
-          const dy = mousePosRef.current.y - particle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          // Gentle push away from mouse
-          if (distance < 100) {
-            const force = (100 - distance) / 100;
-            particle.x -= dx * force * 0.02;
-            particle.y -= dy * force * 0.02;
-          }
-
-          particle.x += particle.speedX;
-          particle.y += particle.speedY;
-
-          // Pulsing opacity
-          particle.opacity =
-            0.05 + Math.sin(Date.now() * particle.pulseSpeed) * 0.1;
-
-          // Wrap around screen
-          if (particle.x > canvas.width) particle.x = 0;
-          if (particle.x < 0) particle.x = canvas.width;
-          if (particle.y > canvas.height) particle.y = 0;
-          if (particle.y < 0) particle.y = canvas.height;
-
-          // Draw particle with subtle glow
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
-          ctx.fill();
-
-          // Very subtle glow effect
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity * 0.3})`;
-          ctx.fill();
-        }
+      particlesRef.current.forEach((p) => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.y > canvas.height) p.y = 0;
+        if (p.y < 0) p.y = canvas.height;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+        ctx.fill();
       });
-
-      // Draw subtle light gradients
-      const lightGradient = ctx.createRadialGradient(
-        canvas.width * 0.3,
-        canvas.height * 0.7,
-        0,
-        canvas.width * 0.3,
-        canvas.height * 0.7,
-        400
-      );
-      lightGradient.addColorStop(0, "rgba(120, 120, 255, 0.03)");
-      lightGradient.addColorStop(1, "rgba(120, 120, 255, 0)");
-      ctx.fillStyle = lightGradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    // Initialize
     handleResize();
     window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-
     animate();
 
-    // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
+      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
   }, []);
 
@@ -266,24 +78,16 @@ const Home = () => {
         {/* Header */}
         <header className="portfolio-header">
           <div className="logo">
-            <Link to="/" className="logo-link">
+            <NavLink to="/" className="logo-link">
               <span className="logo-text">Ayush</span>
               <div className="logo-line"></div>
-            </Link>
+            </NavLink>
           </div>
           <nav className="navigation">
-            <Link to="/" className="nav-item">
-              Home
-            </Link>
-            <Link to="/about" className="nav-item">
-              About
-            </Link>
-            <Link to="/work" className="nav-item">
-              Work
-            </Link>
-            <Link to="/Connect" className="nav-item">
-              Contact
-            </Link>
+            <NavLink to="/" end className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Home</NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>About</NavLink>
+            <NavLink to="/work" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Work</NavLink>
+            <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Contact</NavLink>
           </nav>
         </header>
 
@@ -298,6 +102,10 @@ const Home = () => {
                     src={profileImg}
                     alt="Profile"
                     className="portrait-image"
+                    width="380"
+                    height="480"
+                    fetchpriority="high"
+                    decoding="async"
                   />
                   <div className="portrait-grid">
                     {Array.from({ length: 16 }).map((_, i) => (
@@ -387,19 +195,7 @@ const Home = () => {
             <span className="scroll-text">Explore</span>
           </div> */}
         </footer>
-        <div className="footer-bottom">
-          <p className="copyright">&copy; 2026 Aayushya Shrivastava</p>
-          <div className="flag-counter-wrapper">
-            <p className="flag-label">VISITORS BY COUNTRY</p>
-            <a href="https://info.flagcounter.com/f8SJ" target="_blank" rel="noopener noreferrer">
-              <img
-                src="https://s01.flagcounter.com/count2/f8SJ/bg_111111/txt_AAAAAA/border_333333/columns_5/maxflags_10/viewers_0/labels_1/pageviews_1/flags_1/percent_0/"
-                alt="Flag Counter"
-                className="flag-counter-img"
-              />
-            </a>
-          </div>
-        </div>
+        <p>&copy; 2026 Aayushya Shrivastava</p>
       </div>
     </div>
   );

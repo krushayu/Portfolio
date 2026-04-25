@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./work.css";
 import projectsData from "./projects.json";
 
@@ -137,10 +137,10 @@ const Work = () => {
             <div className="logo-line" />
           </Link>
           <nav className="navigation">
-            <Link to="/" className="nav-item">Home</Link>
-            <Link to="/about" className="nav-item">About</Link>
-            <Link to="/work" className="nav-item active">Work</Link>
-            <Link to="/contact" className="nav-item">Contact</Link>
+            <NavLink to="/" end className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Home</NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>About</NavLink>
+            <NavLink to="/work" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Work</NavLink>
+            <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Contact</NavLink>
           </nav>
         </header>
 

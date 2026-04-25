@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import "./contact.css";
 // import { FaGithub, FaLinkedin, FaBlog } from "react-icons/fa";
@@ -170,24 +170,16 @@ const Contact = () => {
         {/* Header */}
         <header className="portfolio-header">
           <div className="logo">
-            <Link to="/" className="logo-link">
+            <NavLink to="/" className="logo-link">
               <span className="logo-text">Ayush</span>
               <div className="logo-line"></div>
-            </Link>
+            </NavLink>
           </div>
           <nav className="navigation">
-            <Link to="/" className="nav-item">
-              Home
-            </Link>
-            <Link to="/about" className="nav-item">
-              About
-            </Link>
-            <Link to="/work" className="nav-item">
-              Work
-            </Link>
-            <Link to="/contact" className="nav-item active">
-              Contact
-            </Link>
+            <NavLink to="/" end className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Home</NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>About</NavLink>
+            <NavLink to="/work" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Work</NavLink>
+            <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}>Contact</NavLink>
           </nav>
         </header>
 

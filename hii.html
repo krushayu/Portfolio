@@ -2,143 +2,100 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>3D Typography Portrait</title>
-
+<title>Face</title>
 <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    margin: 0;
-    overflow: hidden;
     background: #000;
-    font-family: monospace;
-  }
-
-  #loader {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: black;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 10;
-    color: white;
-    font-size: 24px;
-    animation: blink 1s infinite;
+    justify-content: center;
   }
-
-  @keyframes blink {
-    0%, 50%, 100% { opacity: 1; }
-    25%, 75% { opacity: 0.2; }
-  }
+  canvas { display: block; }
 </style>
 </head>
-
 <body>
-
-<div id="loader">Loading Face...</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/FontLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/geometries/TextGeometry.js"></script>
-
+<canvas id="c"></canvas>
 <script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-let scene, camera, renderer, controls;
-let group = new THREE.Group();
+const img = new Image();
+img.src = 'profile.jpg';
 
-init();
-loadImageAndGenerate();
+img.onload = () => {
+  // Target display size — tall portrait filling most of screen
+  const displayH = Math.floor(canvas.height * 0.92);
+  const displayW = Math.floor(displayH * (img.width / img.height));
 
-function init() {
-  scene = new THREE.Scene();
+  const PIXEL_SIZE = 4; // size of each block in pixels
+  const COLS = Math.floor(displayW / PIXEL_SIZE);
+  const ROWS = Math.floor(displayH / PIXEL_SIZE);
 
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-  camera.position.z = 100;
+  // Sample image into grid
+  const offscreen = document.createElement('canvas');
+  offscreen.width = COLS;
+  offscreen.height = ROWS;
+  const octx = offscreen.getContext('2d');
+  octx.drawImage(img, 0, 0, COLS, ROWS);
+  const data = octx.getImageData(0, 0, COLS, ROWS).data;
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
+  const offsetX = Math.floor((canvas.width - COLS * PIXEL_SIZE) / 2);
+  const offsetY = Math.floor((canvas.height - ROWS * PIXEL_SIZE) / 2);
 
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
+  // Build all pixels
+  const pixels = [];
+  for (let row = 0; row < ROWS; row++) {
+    for (let col = 0; col < COLS; col++) {
+      const i = (row * COLS + col) * 4;
+      const r = data[i], g = data[i+1], b = data[i+2];
+      const brightness = (r * 0.299 + g * 0.587 + b * 0.114) / 255;
+      // skip very bright background pixels
+      if (brightness > 0.92) continue;
+      const gray = Math.floor(brightness * 255);
+      pixels.push({ col, row, gray, brightness });
+    }
+  }
 
-  scene.add(group);
+  // Sort darkest first so face features (eyes, hair) appear first
+  pixels.sort((a, b) => a.brightness - b.brightness);
 
-  animate();
-}
+  // Shuffle within brightness bands for organic reveal feel
+  const BANDS = 60;
+  const bandSize = Math.ceil(pixels.length / BANDS);
+  for (let b = 0; b < BANDS; b++) {
+    const start = b * bandSize;
+    const end = Math.min(start + bandSize, pixels.length);
+    for (let i = end - 1; i > start; i--) {
+      const j = start + Math.floor(Math.random() * (i - start + 1));
+      [pixels[i], pixels[j]] = [pixels[j], pixels[i]];
+    }
+  }
 
-function loadImageAndGenerate() {
+  let revealed = 0;
+  const totalPixels = pixels.length;
+  const batchSize = Math.ceil(totalPixels / 90);
 
-  const img = new Image();
-  img.src = "profile.jpg"; 
+  function draw() {
+    const end = Math.min(revealed + batchSize, totalPixels);
+    for (let i = revealed; i < end; i++) {
+      const { col, row, gray } = pixels[i];
+      const x = offsetX + col * PIXEL_SIZE;
+      const y = offsetY + row * PIXEL_SIZE;
+      ctx.fillStyle = `rgb(${gray},${gray},${gray})`;
+      ctx.fillRect(x, y, PIXEL_SIZE - 1, PIXEL_SIZE - 1);
+    }
+    revealed = end;
+    if (revealed < totalPixels) requestAnimationFrame(draw);
+  }
 
-  img.onload = () => {
-
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    ctx.drawImage(img, 0, 0);
-
-    const data = ctx.getImageData(0, 0, img.width, img.height).data;
-
-    const loader = new THREE.FontLoader();
-
-    loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
-
-      for (let y = 0; y < img.height; y += 4) {
-        for (let x = 0; x < img.width; x += 4) {
-
-          const index = (y * img.width + x) * 4;
-
-          const r = data[index];
-          const g = data[index + 1];
-          const b = data[index + 2];
-
-          const brightness = (r + g + b) / 3;
-
-          if (brightness > 120) {
-
-            const char = "#"; // typography character
-
-            const geometry = new THREE.TextGeometry(char, {
-              font: font,
-              size: 1,
-              height: 0.5,
-            });
-
-            const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-
-            const mesh = new THREE.Mesh(geometry, material);
-
-            mesh.position.x = x - img.width / 2;
-            mesh.position.y = -(y - img.height / 2);
-
-            // 🔥 Depth from brightness
-            mesh.position.z = brightness * 0.2;
-
-            group.add(mesh);
-          }
-        }
-      }
-
-      // hide loader after build
-      document.getElementById("loader").style.display = "none";
-    });
-  };
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  group.rotation.y += 0.002;
-
-  renderer.render(scene, camera);
-}
-
+  requestAnimationFrame(draw);
+};
 </script>
-
 </body>
 </html>
