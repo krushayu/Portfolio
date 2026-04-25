@@ -7,6 +7,7 @@ import Work from "./Work/work";
 import Contact from "./Contact/contact";
 import ProjectDetail from "./Work/ProjectDetail";
 import GitHub from "./GitHub/github";
+import Chatbot from "./Chatbot/chatbot";
 
 function App() {
   useEffect(() => {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/github" element={<GitHub />} />
         </Routes>
       </BrowserRouter>
+      <Chatbot />
     </div>
   );
 }
