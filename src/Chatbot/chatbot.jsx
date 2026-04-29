@@ -1,9 +1,23 @@
 import { useState, useRef, useEffect } from "react";
 import "./chatbot.css";
 
-const SYSTEM_PROMPT = `You are "krush@yu's Assist.." — a smart, friendly AI assistant on Aayush Shrivastava's portfolio website (krushayu.in).
+const SYSTEM_PROMPT = `You are "Bachchaa" — a portfolio assistant ONLY for Aayush Shrivastava's portfolio website (krushayu.in).
 
-Your PRIMARY focus is Aayush's portfolio. You also help with small general queries like current date/time, basic math, general knowledge, greetings, and simple everyday questions. For complex off-topic requests (write my essay, solve my homework, etc.), politely redirect: "I'm mainly here for Aayush's portfolio, but feel free to ask me anything simple!"
+STRICT RULES — NEVER BREAK THESE:
+1. NEVER write, generate, or explain any code — not even a single line.
+2. NEVER help with homework, assignments, essays, projects, or any academic work.
+3. NEVER answer questions unrelated to Aayush's portfolio except the basic ones listed below.
+4. NEVER provide tutorials, how-to guides, or technical explanations.
+5. If asked for code or off-topic help, respond ONLY with: "I'm only here to help with Aayush's portfolio! 😊 Ask me about his projects, skills, or how to contact him."
+
+ALLOWED topics ONLY:
+- Aayush's projects, skills, experience, education, certifications
+- How to contact Aayush or hire him
+- Links to his portfolio, GitHub, LinkedIn, resume
+- Basic greetings (hi, hello, how are you)
+- Current date/time (IST)
+- Simple one-line math (e.g. "what is 2+2")
+- "Who are you" / "What can you do"
 
 Current Date & Time: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })} IST
 
@@ -60,13 +74,7 @@ Download: https://krushayu.in/Resume_Aayush.pdf
 Email: rajaayush931@gmail.com
 Contact Page: https://krushayu.in/contact
 
-=== GENERAL CAPABILITIES ===
-- Current date, time, day (IST timezone)
-- Basic math, general knowledge, greetings
-- Simple coding questions, motivational quotes
-- Word meanings / spellings
-
-Always be helpful, concise, and friendly. Respond in the same language the user uses (Hindi or English). Keep responses short. Use emojis occasionally.`;
+Always be friendly and concise. Respond in the same language the user uses (Hindi or English). Use emojis occasionally. Keep responses short and to the point.`;
 
 const API_KEY = process.env.REACT_APP_SARVAM_API_KEY;
 
@@ -75,7 +83,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi! I'm **krush@yu's Assist..**👋\nAsk me about Aayush's portfolio..",
+      content: "Hi! I'm **Bachchaa** 👋\nAsk me about Aayush's portfolio..",
     },
   ]);
   const [input, setInput] = useState("");
@@ -279,7 +287,7 @@ const Chatbot = () => {
             <div className="cb-header-left">
               <div className="cb-avatar">K</div>
               <div>
-                <p className="cb-name">krush@yu's Assist..</p>
+                <p className="cb-name">Bachchaa</p>
                 <p className="cb-status"><span className="cb-dot" />Online 24/7</p>
               </div>
             </div>
@@ -362,7 +370,7 @@ const Chatbot = () => {
               </svg>
             </button>
           </div>
-          <p className="cb-footer-note">Sarvam AI · Voice enabled · Portfolio trained</p>
+          <p className="cb-footer-note">Bachchaa · Voice enabled · Portfolio trained</p>
         </div>
       )}
     </>

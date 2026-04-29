@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import projectsData from "./projects.json";
 import "./projectDetail.css";
 
@@ -44,7 +44,14 @@ const ProjectDetail = () => {
     return () => { window.removeEventListener("resize", handleResize); if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current); };
   }, []);
 
-  if (!proj) return <div style={{ color: "#fff", padding: "4rem", textAlign: "center" }}>Project not found. <Link to="/work" style={{ color: "#fff" }}>Go back</Link></div>;
+  const recommended = useMemo(() => {
+    const others = allProjects.filter((p) => String(p.id) !== String(proj?.id) || p.domain !== proj?.domain);
+    for (let i = others.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [others[i], others[j]] = [others[j], others[i]];
+    }
+    return others.slice(0, 2);
+  }, [proj?.id, proj?.domain]); // eslint-disable-line
 
   return (
     <div className="pd-page">
@@ -144,10 +151,34 @@ const ProjectDetail = () => {
         </div>
 
         {/* Need Source Code */}
+        {/* Recommendations */}
+        <div className="pd-recommendations">
+          <h2 className="pd-rec-title">You might also like</h2>
+          <div className="pd-rec-grid">
+            {recommended.map((p) => (
+                <Link
+                  key={p.id}
+                  to={`/work/${p.domain.toLowerCase().replace(/\s/g, "-")}/${p.id}`}
+                  className="pd-rec-card"
+                  style={{ "--domain-color": p.domainColor }}
+                >
+                  <div className="pd-rec-top">
+                    <span className="pd-rec-domain" style={{ color: p.domainColor }}>{p.domainIcon} {p.domain}</span>
+                    <span className="pd-rec-date">{p.month} {p.year}</span>
+                  </div>
+                  <h3 className="pd-rec-name">{p.title}</h3>
+                  <p className="pd-rec-desc">{p.description}</p>
+                  <span className="pd-rec-arrow">View Project →</span>
+                </Link>
+              ))}
+          </div>
+        </div>
+
         <div className="pd-contact-note">
           <span>Need Source Code?</span>
           <Link to="/contact" className="pd-contact-link">Contact Me &rarr;</Link>
         </div>
+        <div className="pd-spacer" />
 
         <footer className="pd-footer">
           <div className="signature">&copy; 2026 Aayushya Shrivastava</div>
@@ -160,6 +191,9 @@ const ProjectDetail = () => {
             <span className="separator">/</span>
             <Link to="/contact" className="footer-link">Contact</Link>
           </div>
+          <a href="https://krushayu.in" target="_blank" rel="noopener noreferrer" className="pd-krushayu-tag">
+            krushayu.in
+          </a>
         </footer>
       </div>
     </div>
