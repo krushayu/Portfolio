@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import SEO from "../SEO";
 import "./github.css";
 
 const GitHub = () => {
@@ -70,6 +71,12 @@ const GitHub = () => {
 
   return (
     <div className="gh-page">
+      <SEO
+        title="GitHub Repositories"
+        description="GitHub public repositories by Aayush Shrivastava (krushayu) — Portfolio, Ventify, HelpForYou, Blockchain Medical Storage, Image Editor and more open source projects."
+        url="/github"
+        keywords="krushayu github, Aayush Shrivastava github repos, krushayu open source"
+      />
       <canvas ref={canvasRef} className="background-canvas" />
       <div className="gh-wrapper">
 

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Mosaic Generator | 50+ Photos se Ek Naya Photo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a2a, #1a1a3a);
+            font-family: 'Segoe UI', 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0,170,255,0.5);
+        }
+
+        .sub {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .main-panel {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .input-area {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .result-area {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            flex: 1;
+            min-width: 400px;
+            text-align: center;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #00aaff, #0066cc);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: transform 0.2s;
+            border: none;
+            font-size: 16px;
+        }
+
+        .upload-btn:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #33bbff, #0077dd);
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #44ff44, #00aa44);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 15px;
+            border: none;
+            transition: transform 0.2s;
+        }
+
+        .generate-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #ffaa44, #ff6600);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-left: 10px;
+            border: none;
+            transition: transform 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 80px));
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: transform 0.2s;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: #00aaff;
+        }
+
+        .preview-canvas {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,170,255,0.3);
+            margin-top: 15px;
+            background: #111;
+        }
+
+        .stats {
+            color: #00aaff;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00aaff, #44ff44);
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 900px) {
+            .main-panel {
+                flex-direction: column;
+            }
+            .result-area {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎭 PHOTO MOSAIC GENERATOR</h1>
+        <div class="sub">50-60 alag-alag photos se ek naya photo banayein | Pixel-wise Averaging</div>
+        
+        <div class="main-panel">
+            <!-- Input Area -->
+            <div class="input-area">
+                <h3 style="color:white; margin-bottom:15px;">📸 Step 1: Photos Select Karein</h3>
+                <label class="upload-btn">
+                    📁 50-60 Photos Chune
+                    <input type="file" id="fileInput" multiple accept="image/jpeg,image/png,image/jpg,image/webp">
+                </label>
+                <div class="stats" id="photoCount">0 photos selected</div>
+                <div id="thumbnailContainer" class="thumbnail-grid"></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <!-- Result Area -->
+            <div class="result-area">
+                <h3 style="color:white; margin-bottom:15px;">✨ Step 2: Naya Photo Generate Karein</h3>
+                <button class="generate-btn" id="generateBtn" disabled>🎨 Generate Averaged Face</button>
+                <button class="download-btn" id="downloadBtn" disabled>💾 Download as profile.jpg</button>
+                
+                <div id="resultPreview">
+                    <canvas id="resultCanvas" width="400" height="400" class="preview-canvas" style="width:100%; height:auto; max-width:400px; background:#111;"></canvas>
+                    <p style="color:#888; margin-top:10px; font-size:12px;">⬆️ Yaha naya photo dikhega ⬆️</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align:center; margin-top:30px; color:#666; font-size:12px;">
+            ⚡ Kaise kaam karta hai: Har pixel ka average RGB value nikalta hai 50-60 photos se → Ek naya unique face photo banta hai
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let selectedImages = [];
+        let averagedImageData = null;
+        let resultCanvas = document.getElementById('resultCanvas');
+        let ctx = resultCanvas.getContext('2d');
+        
+        // DOM elements
+        const fileInput = document.getElementById('fileInput');
+        const thumbnailContainer = document.getElementById('thumbnailContainer');
+        const photoCountSpan = document.getElementById('photoCount');
+        const generateBtn = document.getElementById('generateBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const progressFill = document.getElementById('progressFill');
+        
+        // Target output size (profile.jpg quality)
+        const OUTPUT_WIDTH = 512;
+        const OUTPUT_HEIGHT = 512;
+        
+        resultCanvas.width = OUTPUT_WIDTH;
+        resultCanvas.height = OUTPUT_HEIGHT;
+        
+        // Store loaded image data
+        let loadedImageDatas = [];
+        
+        // File selection handler
+        fileInput.addEventListener('change', async (e) => {
+            const files = Array.from(e.target.files);
+            
+            if (files.length === 0) return;
+            
+            photoCountSpan.textContent = `${files.length} photos selected`;
+            
+            // Clear previous
+            thumbnailContainer.innerHTML = '';
+            selectedImages = [];
+            loadedImageDatas = [];
+            
+            // Progress for loading
+            let loaded = 0;
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const img = new Image();
+                
+                const imageLoaded = new Promise((resolve) => {
+                    img.onload = () => {
+                        selectedImages.push(img);
+                        
+                        // Create thumbnail
+                        const thumb = document.createElement('img');
+                        thumb.src = img.src;
+                        thumb.classList.add('thumbnail');
+                        thumbnailContainer.appendChild(thumb);
+                        
+                        loaded++;
+                        const progress = (loaded / files.length) * 50; // 50% for loading
+                        progressFill.style.width = `${progress}%`;
+                        
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        console.warn(`Failed to load: ${file.name}`);
+                        loaded++;
+                        const progress = (loaded / files.length) * 50;
+                        progressFill.style.width = `${progress}%`;
+                        resolve();
+                    };
+                    img.src = URL.createObjectURL(file);
+                });
+                
+                await imageLoaded;
+            }
+            
+            if (selectedImages.length >= 3) {
+                generateBtn.disabled = false;
+                photoCountSpan.innerHTML = `${selectedImages.length} photos selected ✅ Ready to generate!`;
+            } else {
+                photoCountSpan.innerHTML = `${selectedImages.length} photos selected (Minimum 3 photos needed)`;
+                generateBtn.disabled = true;
+            }
+            
+            progressFill.style.width = '50%';
+        });
+        
+        // Function to resize image to target dimensions
+        function resizeImageToCanvas(img, width, height) {
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctxCanvas = canvas.getContext('2d');
+            ctxCanvas.drawImage(img, 0, 0, width, height);
+            return ctxCanvas.getImageData(0, 0, width, height);
+        }
+        
+        // Main function: Average all photos pixel by pixel
+        async function generateAveragedPhoto() {
+            if (selectedImages.length === 0) {
+                alert('Please select at least 3 photos first!');
+                return;
+            }
+            
+            generateBtn.disabled = true;
+            generateBtn.textContent = '🔄 Processing... 0%';
+            downloadBtn.disabled = true;
+            
+            const totalImages = selectedImages.length;
+            
+            // Accumulator arrays for RGB channels
+            let rSum = new Array(OUTPUT_WIDTH * OUTPUT_HEIGHT).fill(0);
+            let gSum = new Array(OUTPUT_WIDTH * OUTPUT_HEIGHT).fill(0);
+            let bSum = new Array(OUTPUT_WIDTH * OUTPUT_HEIGHT).fill(0);
+            
+            // Process each image
+            for (let i = 0; i < totalImages; i++) {
+                const img = selectedImages[i];
+                const imageData = resizeImageToCanvas(img, OUTPUT_WIDTH, OUTPUT_HEIGHT);
+                const pixels = imageData.data;
+                
+                // Add pixel values to accumulators
+                for (let p = 0; p < OUTPUT_WIDTH * OUTPUT_HEIGHT; p++) {
+                    const idx = p * 4;
+                    rSum[p] += pixels[idx];
+                    gSum[p] += pixels[idx + 1];
+                    bSum[p] += pixels[idx + 2];
+                }
+                
+                // Update progress
+                const percent = Math.round(((i + 1) / totalImages) * 100);
+                generateBtn.textContent = `🔄 Processing... ${percent}%`;
+                progressFill.style.width = `${50 + (percent / 2)}%`;
+                
+                // Allow UI to update
+                await new Promise(resolve => setTimeout(resolve, 10));
+            }
+            
+            // Create averaged image
+            const outputImageData = ctx.createImageData(OUTPUT_WIDTH, OUTPUT_HEIGHT);
+            const outputPixels = outputImageData.data;
+            
+            for (let p = 0; p < OUTPUT_WIDTH * OUTPUT_HEIGHT; p++) {
+                const idx = p * 4;
+                outputPixels[idx] = Math.round(rSum[p] / totalImages);     // R
+                outputPixels[idx + 1] = Math.round(gSum[p] / totalImages); // G
+                outputPixels[idx + 2] = Math.round(bSum[p] / totalImages); // B
+                outputPixels[idx + 3] = 255; // Alpha
+            }
+            
+            // Draw to canvas
+            ctx.putImageData(outputImageData, 0, 0);
+            
+            averagedImageData = outputImageData;
+            
+            generateBtn.textContent = '✅ Generated Successfully!';
+            generateBtn.disabled = false;
+            downloadBtn.disabled = false;
+            progressFill.style.width = '100%';
+            
+            // Add a subtle animation effect
+            resultCanvas.style.animation = 'pulse 0.5s ease';
+            setTimeout(() => {
+                resultCanvas.style.animation = '';
+            }, 500);
+        }
+        
+        // Download as profile.jpg
+        function downloadAsProfileJPG() {
+            if (!averagedImageData) {
+                alert('Please generate the image first!');
+                return;
+            }
+            
+            // Convert canvas to blob and download
+            resultCanvas.toBlob((blob) => {
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                link.href = url;
+                link.download = 'profile.jpg';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                // Show success message
+                const btnText = downloadBtn.textContent;
+                downloadBtn.textContent = '✅ Downloaded!';
+                setTimeout(() => {
+                    downloadBtn.textContent = btnText;
+                }, 2000);
+            }, 'image/jpeg', 0.95);
+        }
+        
+        // Event listeners
+        generateBtn.addEventListener('click', generateAveragedPhoto);
+        downloadBtn.addEventListener('click', downloadAsProfileJPG);
+        
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0,170,255,0.7); }
+                50% { transform: scale(1.02); box-shadow: 0 0 0 20px rgba(0,170,255,0); }
+                100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0,170,255,0); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Demo instructions display
+        console.log('Photo Mosaic Ready! Select 50-60 photos to create an average face image.');
+        
+        // Optional: Add sample instructions if no photos selected
+        const instructionDiv = document.createElement('div');
+        instructionDiv.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: #0af;
+            font-size: 12px;
+            font-family: monospace;
+            pointer-events: none;
+            z-index: 100;
+        `;
+        instructionDiv.innerHTML = `📌 Tip: 50-60 different face photos se ek unique averaged photo banega<br>🎯 Jitni zyada photos, utna smooth result`;
+        document.body.appendChild(instructionDiv);
+    </script>
+</body>
+</html>

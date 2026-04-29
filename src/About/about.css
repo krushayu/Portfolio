@@ -238,19 +238,19 @@
 
 .description-primary {
   text-align: justify;
-  font-size: 1.6rem;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  line-height: 1.7;
   margin-bottom: 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .highlight-gradient {
-  background: linear-gradient(135deg, #22c1c3, #2dfd8b);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 600;
+  color: #e8b86d;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
+
 
 .description-secondary {
   text-align: justify;
@@ -974,3 +974,101 @@
   transition: color 0.2s ease;
 }
 .ach-event-link:hover { color: #fff; }
+
+/* ===== ANIMATED RESUME BUTTON ===== */
+.resume-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.8rem;
+  background: #fff;
+  color: #000;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: 'Caveat', cursive;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.resume-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255,255,255,0.15);
+}
+
+.resume-btn-text {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+.resume-btn-icon {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+.resume-btn-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: #000;
+  transition: stroke 0.3s ease;
+}
+
+/* Progress bar that fills on click */
+.resume-btn-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #22c1c3, #2dfd8b);
+  border-radius: 0 0 14px 14px;
+  transition: none;
+  z-index: 3;
+}
+
+.resume-btn.downloading {
+  background: #111;
+  color: #fff;
+  border-color: rgba(255,255,255,0.15);
+  pointer-events: none;
+}
+
+.resume-btn.downloading .resume-btn-text { color: rgba(255,255,255,0.8); }
+.resume-btn.downloading .resume-btn-icon svg { stroke: rgba(255,255,255,0.8); }
+
+.resume-btn.downloading .resume-btn-progress {
+  width: 100%;
+  transition: width 2.8s cubic-bezier(0.1, 0.4, 0.6, 1);
+}
+
+/* Spin animation for loading icon */
+.resume-spin {
+  animation: resumeSpin 0.8s linear infinite;
+}
+
+@keyframes resumeSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Particle burst on click */
+.resume-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(34,193,195,0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.resume-btn.downloading::before { opacity: 1; }

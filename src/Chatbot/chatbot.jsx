@@ -202,7 +202,7 @@ const Chatbot = () => {
       // Clean text — remove markdown, emojis for TTS
       const cleanText = text
         .replace(/\*\*(.*?)\*\*/g, "$1")
-        .replace(/[^\x00-\x7F]/g, "")
+        .replace(/[^\u0020-\u007E]/g, "")
         .replace(/https?:\/\/\S+/g, "")
         .trim()
         .slice(0, 500); // Sarvam TTS limit

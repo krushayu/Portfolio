@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import SEO from "../SEO";
 import emailjs from "@emailjs/browser";
 import "./contact.css";
 // import { FaGithub, FaLinkedin, FaBlog } from "react-icons/fa";
@@ -162,6 +163,12 @@ const Contact = () => {
 
   return (
     <div className="portfolio-contact">
+      <SEO
+        title="Contact"
+        description="Contact Aayush Shrivastava (krushayu) — Full Stack Developer. Email: rajaayush931@gmail.com. Available for freelance, internships and collaborations."
+        url="/contact"
+        keywords="contact krushayu, hire Aayush Shrivastava, krushayu email, krushayu freelance"
+      />
       {/* Background Canvas (About page style) */}
       <canvas ref={canvasRef} className="background-canvas" />
 

@@ -17,7 +17,7 @@
     <meta name="google-site-verification" content="12vg5LyD2IAu_oDhJJgwfroEYEontjpMWMeWgVBmdUM" />
 
     <!-- ===== PRIMARY SEO ===== -->
-    <title>Aayush Shrivastava (krushayu) | Full Stack Developer & MERN Engineer</title>
+    <title>krushayu</title>
     <meta name="title" content="Aayush Shrivastava (krushayu) | Full Stack Developer & MERN Engineer" />
     <meta name="description" content="Aayush Shrivastava, known as krushayu, is a Full Stack MERN Developer and B.Tech CS student from Odisha, India. Built YamGram, HealthHub, Ventify and more. Explore projects, skills, and experience at krushayu.in" />
     <meta name="keywords" content="krushayu, Aayush Shrivastava, Ayush Shrivastava, krushayu developer, krushayu github, krushayu portfolio, krushayu.in, Aayush Shrivastava developer, Full Stack Developer India, MERN Stack Developer, React Developer Odisha, Node.js Developer India, YamGram, HealthHub, Ventify, HelpForYou, Centurion University developer, Web Developer Paralakhemundi, JavaScript Developer India, MongoDB Developer, Express.js Developer, Socket.io Developer, Blockchain Developer India, AI ML Developer India" />
@@ -272,174 +272,29 @@
         inset: 0;
         background: #0b0b0f;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
         z-index: 9999;
-        transition: opacity 0.6s ease;
+        transition: opacity 0.5s ease;
       }
 
-      /* SIMPLE BUT ELEGANT NAME */
-      .name {
-        font-size: 3.5rem;
+      .loader-name {
+        font-size: 3rem;
         font-weight: 300;
-        letter-spacing: 0.3em;
-        margin-bottom: 4rem;
+        letter-spacing: 0.4em;
         color: transparent;
         background: linear-gradient(90deg, #e5e7eb 50%, transparent 50%);
         background-size: 200% 100%;
         background-position: 100% 0;
         -webkit-background-clip: text;
         background-clip: text;
-        animation: reveal 2s ease-in-out forwards;
+        animation: reveal 1s ease-in-out forwards;
+        font-family: "Caveat", cursive;
       }
 
       @keyframes reveal {
-        0% {
-          background-position: 100% 0;
-          letter-spacing: 0.8em;
-        }
-        100% {
-          background-position: 0 0;
-          letter-spacing: 0.3em;
-        }
-      }
-
-      /* ELEGANT LINE LOADER */
-      .line-loader {
-        width: 300px;
-        height: 2px;
-        background: rgba(255, 255, 255, 0.1);
-        position: relative;
-        overflow: hidden;
-        margin: 2rem 0;
-      }
-
-      .line-fill {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        background: #e5e7eb;
-        transform: translateX(-100%);
-        animation: slide 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      }
-
-      @keyframes slide {
-        0% {
-          transform: translateX(-100%);
-        }
-        50% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(100%);
-        }
-      }
-
-      /* FLOATING TEXT */
-      .floating-text {
-        position: relative;
-        font-size: 1rem;
-        font-weight: 300;
-        letter-spacing: 0.1em;
-        margin-top: 3rem;
-        color: rgba(229, 231, 235, 0.6);
-        opacity: 0;
-        animation: fadeIn 1s ease 1s forwards;
-      }
-
-      @keyframes fadeIn {
-        to {
-          opacity: 1;
-        }
-      }
-
-      /* CIRCLES */
-      .circles {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 3rem;
-        opacity: 0;
-        animation: fadeIn 1s ease 0.5s forwards;
-      }
-
-      .circle {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: #e5e7eb;
-        opacity: 0.3;
-        animation: breathe 2s infinite ease-in-out;
-      }
-
-      .circle:nth-child(1) {
-        animation-delay: 0s;
-      }
-      .circle:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-      .circle:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-
-      @keyframes breathe {
-        0%,
-        100% {
-          transform: scale(0.8);
-          opacity: 0.3;
-        }
-        50% {
-          transform: scale(1.2);
-          opacity: 0.8;
-        }
-      }
-
-      /* SUBTLE BACKGROUND PATTERN */
-      .bg-pattern {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        opacity: 0.05;
-        background-image: radial-gradient(
-            circle at 25% 25%,
-            rgba(255, 255, 255, 0.1) 1px,
-            transparent 1px
-          ),
-          radial-gradient(
-            circle at 75% 75%,
-            rgba(255, 255, 255, 0.1) 1px,
-            transparent 1px
-          );
-        background-size: 50px 50px;
-        background-position: 0 0, 25px 25px;
-        animation: patternShift 20s linear infinite;
-      }
-
-      @keyframes patternShift {
-        0% {
-          background-position: 0 0, 25px 25px;
-        }
-        100% {
-          background-position: 50px 50px, 75px 75px;
-        }
-      }
-
-      /* NUMBER COUNTER */
-      .counter {
-        font-size: 3rem;
-        font-weight: 200;
-        font-variant-numeric: tabular-nums;
-        color: rgba(229, 231, 235, 0.8);
-        margin: 2rem 0;
-        position: relative;
-      }
-
-      .counter::after {
-        content: "%";
-        font-size: 1.5rem;
-        position: absolute;
-        top: -0.5rem;
-        margin-left: 0.2rem;
+        0% { background-position: 100% 0; letter-spacing: 0.8em; }
+        100% { background-position: 0 0; letter-spacing: 0.4em; }
       }
 
       /* REACT ROOT */
@@ -532,81 +387,22 @@
   <body>
     <!-- LOADING SCREEN -->
     <div id="loader">
-      <div class="bg-pattern"></div>
-
-      <div class="circles">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-      </div>
-
-      <div class="name">Ayushyaa</div>
-
-      <div class="counter" id="counter">0</div>
-
-      <div class="line-loader">
-        <div class="line-fill"></div>
-      </div>
-
-      <div class="floating-text">Awaiting creative energy</div>
+      <div class="loader-name">AYUSHYAA</div>
     </div>
 
     <!-- REACT APP -->
     <div id="root"></div>
 
     <script>
-      // Counter animation
-      let count = 0;
-      const counter = document.getElementById("counter");
-      const countInterval = setInterval(() => {
-        count++;
-        counter.textContent = count;
-
-        // Smooth transition at the end
-        if (count >= 100) {
-          clearInterval(countInterval);
-
-          // Small pause at 100%
-          setTimeout(() => {
-            document.getElementById("loader").style.opacity = "0";
-
-            setTimeout(() => {
-              document.getElementById("loader").style.display = "none";
-              document.getElementById("root").style.display = "block";
-              document.body.style.overflow = "auto";
-            }, 600);
-          }, 300);
-        }
-      }, 30);
-
-      // Floating text changes
-      const texts = [
-        "Awaiting creative energy",
-        "Preparing canvas",
-        "Calibrating vision",
-        "Almost there",
-      ];
-
-      const floatingText = document.querySelector(".floating-text");
-      let textIndex = 0;
-
-      setInterval(() => {
-        textIndex = (textIndex + 1) % texts.length;
-        floatingText.style.opacity = "0";
-
+      setTimeout(() => {
+        const loader = document.getElementById("loader");
+        loader.style.opacity = "0";
         setTimeout(() => {
-          floatingText.textContent = texts[textIndex];
-          floatingText.style.opacity = "1";
-        }, 400);
-      }, 2000);
-
-      const nameEl = document.querySelector(".name");
-      nameEl.addEventListener("mouseenter", () => {
-        nameEl.style.animation = "none";
-        setTimeout(() => {
-          nameEl.style.animation = "reveal 1s ease-in-out forwards";
-        }, 10);
-      });
+          loader.style.display = "none";
+          document.getElementById("root").style.display = "block";
+          document.body.style.overflow = "auto";
+        }, 500);
+      }, 1500);
     </script>
   </body>
 </html>

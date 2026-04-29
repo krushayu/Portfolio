@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Face</title>
+<title>Photo Mosaic Masterpiece | 50+ Photos se Ek Badi Photo</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -13,89 +13,382 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: monospace;
   }
   canvas { display: block; }
+  
+  .controls {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    border-radius: 12px;
+    color: white;
+    z-index: 100;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.2);
+    pointer-events: auto;
+  }
+  
+  .btn {
+    background: linear-gradient(135deg, #00aaff, #0066cc);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    color: white;
+    transition: transform 0.2s;
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+  }
+  
+  .btn-generate {
+    background: linear-gradient(135deg, #44ff44, #00aa44);
+  }
+  
+  .status {
+    color: #00aaff;
+    font-size: 12px;
+    padding: 5px 10px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 6px;
+  }
+  
+  .photo-count {
+    background: rgba(0,170,255,0.3);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  
+  @media (max-width: 700px) {
+    .controls { flex-direction: column; align-items: stretch; }
+    .btn { text-align: center; }
+  }
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
+<div class="controls">
+  <label class="btn">
+    📁 Select 50-60 Photos
+    <input type="file" id="fileInput" multiple accept="image/jpeg,image/png,image/jpg,image/webp">
+  </label>
+  <button class="btn btn-generate" id="generateBtn" disabled>🎨 Generate Photo Mosaic</button>
+  <div class="photo-count" id="photoCount">0 photos selected</div>
+  <div class="status" id="status">Ready</div>
+</div>
+
 <script>
 const canvas = document.getElementById('c');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const img = new Image();
-img.src = 'profile.jpg';
+// Variables
+let selectedImages = [];
+let mosaicGenerated = false;
+let targetImage = null;
+let tileImages = [];
+let TILE_SIZE = 20; // size of each tile (photo) in pixels
+let COLS, ROWS;
 
-img.onload = () => {
-  // Target display size — tall portrait filling most of screen
-  const displayH = Math.floor(canvas.height * 0.92);
-  const displayW = Math.floor(displayH * (img.width / img.height));
+// DOM elements
+const fileInput = document.getElementById('fileInput');
+const generateBtn = document.getElementById('generateBtn');
+const photoCountSpan = document.getElementById('photoCount');
+const statusSpan = document.getElementById('status');
 
-  const PIXEL_SIZE = 4; // size of each block in pixels
-  const COLS = Math.floor(displayW / PIXEL_SIZE);
-  const ROWS = Math.floor(displayH / PIXEL_SIZE);
+// Load default target image (profile.jpg) - create a default face if not exists
+const defaultTargetImg = new Image();
+defaultTargetImg.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"%3E%3Crect width="400" height="400" fill="%23333"/%3E%3Ccircle cx="200" cy="180" r="60" fill="%23aa8866"/%3E%3Ccircle cx="165" cy="165" r="8" fill="white"/%3E%3Ccircle cx="235" cy="165" r="8" fill="white"/%3E%3Ccircle cx="165" cy="165" r="4" fill="black"/%3E%3Ccircle cx="235" cy="165" r="4" fill="black"/%3E%3Cpath d="M170 220 Q200 250 230 220" stroke="%23886644" stroke-width="4" fill="none"/%3E%3Crect x="185" y="280" width="30" height="40" fill="%23886644"/%3E%3C/svg%3E';
 
-  // Sample image into grid
+// Load the target image (profile.jpg or fallback)
+const targetImg = new Image();
+targetImg.crossOrigin = "Anonymous";
+targetImg.onload = () => {
+  targetImage = targetImg;
+  if (selectedImages.length > 0 && !mosaicGenerated) {
+    // Enable generate button
+    generateBtn.disabled = false;
+  }
+  statusSpan.textContent = 'Target image loaded';
+};
+targetImg.onerror = () => {
+  // Use default if profile.jpg not found
+  targetImg.src = defaultTargetImg.src;
+  statusSpan.textContent = 'Using default target face';
+};
+targetImg.src = 'profile.jpg';
+
+// Handle file selection
+fileInput.addEventListener('change', async (e) => {
+  const files = Array.from(e.target.files);
+  
+  if (files.length === 0) return;
+  
+  statusSpan.textContent = `Loading ${files.length} photos...`;
+  selectedImages = [];
+  tileImages = [];
+  
+  let loaded = 0;
+  
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const img = new Image();
+    
+    await new Promise((resolve) => {
+      img.onload = () => {
+        selectedImages.push(img);
+        loaded++;
+        statusSpan.textContent = `Loaded ${loaded}/${files.length} photos`;
+        resolve();
+      };
+      img.onerror = () => {
+        console.warn(`Failed: ${file.name}`);
+        loaded++;
+        statusSpan.textContent = `Loaded ${loaded}/${files.length} (some failed)`;
+        resolve();
+      };
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  
+  photoCountSpan.textContent = `${selectedImages.length} photos ready`;
+  
+  if (selectedImages.length >= 10 && targetImage) {
+    generateBtn.disabled = false;
+    statusSpan.textContent = 'Ready to generate mosaic!';
+  } else if (selectedImages.length < 10) {
+    statusSpan.textContent = `Need at least 10 photos (${selectedImages.length} selected)`;
+    generateBtn.disabled = true;
+  }
+});
+
+// Function to get average color of an image
+function getAverageColor(img, width, height) {
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const tempCtx = canvas.getContext('2d');
+  tempCtx.drawImage(img, 0, 0, width, height);
+  const data = tempCtx.getImageData(0, 0, width, height).data;
+  
+  let r = 0, g = 0, b = 0;
+  const pixelCount = width * height;
+  
+  for (let i = 0; i < pixelCount; i++) {
+    r += data[i * 4];
+    g += data[i * 4 + 1];
+    b += data[i * 4 + 2];
+  }
+  
+  return {
+    r: Math.floor(r / pixelCount),
+    g: Math.floor(g / pixelCount),
+    b: Math.floor(b / pixelCount)
+  };
+}
+
+// Function to find best matching photo for a given color
+function findBestMatch(r, g, b) {
+  if (tileImages.length === 0) return null;
+  
+  let bestIndex = 0;
+  let bestDiff = Infinity;
+  
+  for (let i = 0; i < tileImages.length; i++) {
+    const tile = tileImages[i];
+    const diff = Math.abs(tile.avgColor.r - r) + 
+                 Math.abs(tile.avgColor.g - g) + 
+                 Math.abs(tile.avgColor.b - b);
+    
+    if (diff < bestDiff) {
+      bestDiff = diff;
+      bestIndex = i;
+    }
+  }
+  
+  return tileImages[bestIndex];
+}
+
+// Main mosaic generation function
+async function generateMosaic() {
+  if (!targetImage || selectedImages.length === 0) {
+    statusSpan.textContent = 'Please select photos and wait for target image';
+    return;
+  }
+  
+  generateBtn.disabled = true;
+  generateBtn.textContent = '🔄 Analyzing photos...';
+  statusSpan.textContent = 'Step 1/3: Analyzing tile colors...';
+  
+  // Calculate tile size based on screen and image resolution
+  const displayW = Math.min(canvas.width - 40, 1200);
+  const displayH = Math.min(canvas.height - 100, 900);
+  const aspect = targetImage.width / targetImage.height;
+  
+  let finalW = displayW;
+  let finalH = finalW / aspect;
+  if (finalH > displayH) {
+    finalH = displayH;
+    finalW = finalH * aspect;
+  }
+  
+  // Adjust tile size for better quality
+  TILE_SIZE = Math.max(12, Math.min(30, Math.floor(finalW / 40)));
+  COLS = Math.floor(finalW / TILE_SIZE);
+  ROWS = Math.floor(finalH / TILE_SIZE);
+  
+  const tileW = TILE_SIZE;
+  const tileH = TILE_SIZE;
+  
+  const offsetX = (canvas.width - COLS * tileW) / 2;
+  const offsetY = (canvas.height - ROWS * tileH) / 2;
+  
+  statusSpan.textContent = `Step 2/3: Analyzing ${selectedImages.length} photos...`;
+  
+  // Pre-analyze all tile images (get their average colors)
+  tileImages = [];
+  for (let i = 0; i < selectedImages.length; i++) {
+    const img = selectedImages[i];
+    const avgColor = getAverageColor(img, 20, 20);
+    tileImages.push({
+      img: img,
+      avgColor: avgColor
+    });
+    
+    if (i % 10 === 0) {
+      statusSpan.textContent = `Analyzing photos: ${i+1}/${selectedImages.length}`;
+      await new Promise(r => setTimeout(r, 5));
+    }
+  }
+  
+  statusSpan.textContent = `Step 3/3: Creating mosaic (${COLS}x${ROWS} tiles)...`;
+  
+  // Create offscreen canvas for target image sampling
   const offscreen = document.createElement('canvas');
   offscreen.width = COLS;
   offscreen.height = ROWS;
   const octx = offscreen.getContext('2d');
-  octx.drawImage(img, 0, 0, COLS, ROWS);
-  const data = octx.getImageData(0, 0, COLS, ROWS).data;
-
-  const offsetX = Math.floor((canvas.width - COLS * PIXEL_SIZE) / 2);
-  const offsetY = Math.floor((canvas.height - ROWS * PIXEL_SIZE) / 2);
-
-  // Build all pixels
-  const pixels = [];
-  for (let row = 0; row < ROWS; row++) {
-    for (let col = 0; col < COLS; col++) {
-      const i = (row * COLS + col) * 4;
-      const r = data[i], g = data[i+1], b = data[i+2];
-      const brightness = (r * 0.299 + g * 0.587 + b * 0.114) / 255;
-      // skip very bright background pixels
-      if (brightness > 0.92) continue;
-      const gray = Math.floor(brightness * 255);
-      pixels.push({ col, row, gray, brightness });
+  octx.drawImage(targetImage, 0, 0, COLS, ROWS);
+  const targetData = octx.getImageData(0, 0, COLS, ROWS).data;
+  
+  // Clear canvas
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw mosaic tile by tile
+  let drawn = 0;
+  const totalTiles = COLS * ROWS;
+  
+  function drawNextBatch(batchStart) {
+    const batchEnd = Math.min(batchStart + 50, totalTiles);
+    
+    for (let idx = batchStart; idx < batchEnd; idx++) {
+      const row = Math.floor(idx / COLS);
+      const col = idx % COLS;
+      
+      const pixelIndex = (row * COLS + col) * 4;
+      const r = targetData[pixelIndex];
+      const g = targetData[pixelIndex + 1];
+      const b = targetData[pixelIndex + 2];
+      const brightness = (r * 0.299 + g * 0.587 + b * 0.114);
+      
+      // Skip very dark or very bright areas? No, keep all
+      const bestTile = findBestMatch(r, g, b);
+      
+      if (bestTile) {
+        const x = offsetX + col * tileW;
+        const y = offsetY + row * tileH;
+        
+        // Draw the photo tile
+        ctx.drawImage(bestTile.img, x, y, tileW, tileH);
+        
+        // Add subtle border for definition
+        ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+        ctx.lineWidth = 0.5;
+        ctx.strokeRect(x, y, tileW, tileH);
+      }
+    }
+    
+    drawn = batchEnd;
+    const percent = Math.floor((drawn / totalTiles) * 100);
+    statusSpan.textContent = `Creating mosaic: ${percent}%`;
+    generateBtn.textContent = `🎨 Generating... ${percent}%`;
+    
+    if (drawn < totalTiles) {
+      requestAnimationFrame(() => drawNextBatch(drawn));
+    } else {
+      // Complete
+      mosaicGenerated = true;
+      statusSpan.textContent = `✅ Mosaic complete! ${selectedImages.length} photos used`;
+      generateBtn.textContent = '✨ Regenerate Mosaic';
+      generateBtn.disabled = false;
     }
   }
+  
+  drawNextBatch(0);
+}
 
-  // Sort darkest first so face features (eyes, hair) appear first
-  pixels.sort((a, b) => a.brightness - b.brightness);
-
-  // Shuffle within brightness bands for organic reveal feel
-  const BANDS = 60;
-  const bandSize = Math.ceil(pixels.length / BANDS);
-  for (let b = 0; b < BANDS; b++) {
-    const start = b * bandSize;
-    const end = Math.min(start + bandSize, pixels.length);
-    for (let i = end - 1; i > start; i--) {
-      const j = start + Math.floor(Math.random() * (i - start + 1));
-      [pixels[i], pixels[j]] = [pixels[j], pixels[i]];
-    }
+// Generate button click handler
+generateBtn.addEventListener('click', () => {
+  if (selectedImages.length >= 10 && targetImage) {
+    generateMosaic();
+  } else {
+    statusSpan.textContent = `Please select at least 10 photos (${selectedImages.length} selected)`;
   }
+});
 
-  let revealed = 0;
-  const totalPixels = pixels.length;
-  const batchSize = Math.ceil(totalPixels / 90);
-
-  function draw() {
-    const end = Math.min(revealed + batchSize, totalPixels);
-    for (let i = revealed; i < end; i++) {
-      const { col, row, gray } = pixels[i];
-      const x = offsetX + col * PIXEL_SIZE;
-      const y = offsetY + row * PIXEL_SIZE;
-      ctx.fillStyle = `rgb(${gray},${gray},${gray})`;
-      ctx.fillRect(x, y, PIXEL_SIZE - 1, PIXEL_SIZE - 1);
-    }
-    revealed = end;
-    if (revealed < totalPixels) requestAnimationFrame(draw);
+// Handle window resize
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  if (mosaicGenerated) {
+    generateMosaic();
   }
+});
 
-  requestAnimationFrame(draw);
-};
+// Initial status
+statusSpan.textContent = 'Select 50-60 photos and wait for target image...';
+
+// Instructions overlay
+const instructions = document.createElement('div');
+instructions.style.cssText = `
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.7);
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: #0af;
+  font-size: 11px;
+  font-family: monospace;
+  pointer-events: none;
+  z-index: 100;
+  text-align: right;
+`;
+instructions.innerHTML = `🎯 How it works:<br>
+1. Select 50-60 photos<br>
+2. Each photo replaces a tile<br>
+3. Colors match target face<br>
+4. Final = Photo Mosaic!`;
+document.body.appendChild(instructions);
 </script>
 </body>
 </html>

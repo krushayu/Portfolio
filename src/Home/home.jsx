@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import "./home.css";
 import profileImg from "../assest/profile.jpg";
 import { NavLink } from "react-router-dom";
+import SEO from "../SEO";
 const Home = () => {
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
@@ -70,6 +71,12 @@ const Home = () => {
 
   return (
     <div className="portfolio-home">
+      <SEO
+        title="Home"
+        description="Aayush Shrivastava (krushayu) — Full Stack MERN Developer. Student at Centurion University, Odisha. Building scalable web apps with React, Node.js, MongoDB."
+        url="/"
+        keywords="krushayu, Aayush Shrivastava, Full Stack Developer, MERN Stack, React Developer, Portfolio"
+      />
       {/* Background Canvas */}
       <canvas ref={canvasRef} className="background-canvas" />
 

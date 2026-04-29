@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import SEO from "../SEO";
 import "./about.css";
 import profileImg from "../assest/profile.jpg";
 import pData from "./portfolioData.json";
@@ -41,7 +42,7 @@ const AchievementItem = ({ ach }) => {
 
 
 const LINES = [
-  "Code. Create. Break. Learn. Repeat.",
+  "If it's according to your wish then it's good, if it's not according to your wish then it's even better, because whatever is not according to your wish is according to their wish...",
 ];
 
 const About = () => {
@@ -49,21 +50,27 @@ const About = () => {
   const particlesRef = useRef([]);
   const animationFrameRef = useRef(null);
   const [typed, setTyped] = useState("");
+  const [downloading, setDownloading] = useState(false);
+  const resumeBtnRef = useRef(null);
+
+  useEffect(() => {
+    if (downloading && resumeBtnRef.current) {
+      const bar = resumeBtnRef.current.querySelector('.resume-btn-progress');
+      if (bar) { bar.style.width = '0%'; setTimeout(() => { bar.style.width = '100%'; }, 50); }
+    }
+  }, [downloading]);
+  const [typeDone, setTypeDone] = useState(false);
 
   useEffect(() => {
     let charIdx = 0;
-    let pausing = false;
-    let pauseCount = 0;
     const interval = setInterval(() => {
-      if (pausing) {
-        pauseCount++;
-        if (pauseCount >= 13) { pausing = false; pauseCount = 0; charIdx = 0; }
-        return;
-      }
       charIdx++;
       setTyped(LINES[0].slice(0, charIdx));
-      if (charIdx >= LINES[0].length) pausing = true;
-    }, 60);
+      if (charIdx >= LINES[0].length) {
+        clearInterval(interval);
+        setTypeDone(true);
+      }
+    }, 45);
     return () => clearInterval(interval);
   }, []);
 
@@ -164,6 +171,12 @@ const About = () => {
 
   return (
     <div className="about-page">
+      <SEO
+        title="About"
+        description="About Aayush Shrivastava (krushayu) — B.Tech CS student at Centurion University. Experience at DIGISAMAKSH & CodeAlpha. Certified by Google, GeeksForGeeks, Infosys. Hackathon winner."
+        url="/about"
+        keywords="Aayush Shrivastava about, krushayu education, krushayu experience, krushayu certifications, Centurion University developer"
+      />
       <canvas ref={canvasRef} className="background-canvas" />
 
       {/* Main Content */}
@@ -223,8 +236,8 @@ const About = () => {
 
             <div className="hero-description">
               <p className="description-primary">
-                I believe in one simple cycle:{" "}
-                <span className="highlight-gradient">{typed}<span className="type-cursor">{typed.length < LINES[0].length ? "|" : ""}</span></span>
+                I believe in:{" "}
+                <span className="highlight-gradient">{typed}{!typeDone && <span className="type-cursor">|</span>}</span>
               </p>
               <p className="description-secondary">
                 Currently pursuing B.Tech in Computer Science &amp; Engineering
@@ -451,15 +464,32 @@ const About = () => {
               <h3 className="resume-title">Download My Resume</h3>
               <p className="resume-subtitle">Get a detailed overview of my experience and skills</p>
             </div>
-            <a 
-              href="/Resume_Aayush.pdf" 
+            <a
+              href="/Resume_Aayush.pdf"
               download="Resume_Aayush.pdf"
-              className="resume-btn"
+              className={`resume-btn ${downloading ? "downloading" : ""}`}
+              ref={resumeBtnRef}
+              onClick={() => {
+                setDownloading(true);
+                setTimeout(() => setDownloading(false), 3000);
+              }}
             >
-              <span>Download Resume</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z" />
-              </svg>
+              <span className="resume-btn-text">
+                {downloading ? "Downloading..." : "Download Resume"}
+              </span>
+              <span className="resume-btn-icon">
+                {downloading ? (
+                  <svg className="resume-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 10v6m0 0l-3-3m3 3l3-3"/>
+                    <path d="M20 17v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2"/>
+                  </svg>
+                )}
+              </span>
+              <span className="resume-btn-progress" />
             </a>
           </div>
         </div>

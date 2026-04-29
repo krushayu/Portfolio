@@ -125,7 +125,7 @@ const ProjectDetail = () => {
                   <span className="pd-feature-dot" style={{ background: proj.domainColor }} />
                   {f}
                 </li>
-              ))}
+              ))}x
             </ul>
           </div>
 

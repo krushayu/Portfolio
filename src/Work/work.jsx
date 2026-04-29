@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
+import SEO from "../SEO";
 import "./work.css";
 import projectsData from "./projects.json";
 
@@ -72,6 +73,12 @@ const Work = () => {
 
   return (
     <div className="work-page">
+      <SEO
+        title="Projects"
+        description="All projects by Aayush Shrivastava (krushayu) — YamGram, HealthHub, Ventify, HelpForYou, Blockchain Medical Storage, AI GD Analyzer, Wild Animal Detection, Image Editor."
+        url="/work"
+        keywords="krushayu projects, YamGram, HealthHub, Ventify, HelpForYou, Blockchain, AI projects, krushayu portfolio work"
+      />
       <canvas ref={canvasRef} className="background-canvas" />
       <div className="content-wrapper">
 
