@@ -67,7 +67,7 @@ const Work = () => {
   }, []);
 
   const openProject = (p) => {
-    const domainSlug = p.domain.toLowerCase().replace(/\s/g, "-");
+const domainSlug = p.domain.toLowerCase().replace(/[\s/]+/g, "-");
     navigate(`/project/${domainSlug}/${p.id}`);
   };
 
@@ -75,7 +75,7 @@ const Work = () => {
     <div className="work-page">
       <SEO
         title="Projects"
-        description="All projects by Aayush Shrivastava (krushayu) — YamGram, HealthHub, Ventify, HelpForYou, Blockchain Medical Storage, AI GD Analyzer, Wild Animal Detection, Image Editor."
+        description="All projects by Aayush Shrivastava (krushayu) ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â YamGram, HealthHub, Ventify, HelpForYou, Blockchain Medical Storage, AI GD Analyzer, Wild Animal Detection, Image Editor."
         url="/work"
         keywords="krushayu projects, YamGram, HealthHub, Ventify, HelpForYou, Blockchain, AI projects, krushayu portfolio work"
       />
@@ -120,7 +120,7 @@ const Work = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
             {search && (
-              <button className="search-clear" onClick={() => setSearch("")}>✕</button>
+              <button className="search-clear" onClick={() => setSearch("")}>ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¢</button>
             )}
           </div>
         </div>

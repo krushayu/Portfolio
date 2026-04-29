@@ -14,7 +14,7 @@ const ProjectDetail = () => {
   );
 
   const proj = allProjects.find(
-    (p) => p.domain.toLowerCase().replace(/\s/g, "-") === domain && String(p.id) === String(id)
+    (p) => p.domain.toLowerCase().replace(/[\s/]+/g, "-") === domain && String(p.id) === String(id)
   );
 
   useEffect(() => {
@@ -52,6 +52,8 @@ const ProjectDetail = () => {
     }
     return others.slice(0, 2);
   }, [proj?.id, proj?.domain]); // eslint-disable-line
+
+  if (!proj) return <div style={{ color: "#fff", padding: "4rem", textAlign: "center" }}>Project not found. <Link to="/work" style={{ color: "#fff" }}>Go back</Link></div>;
 
   return (
     <div className="pd-page">
@@ -116,7 +118,7 @@ const ProjectDetail = () => {
           {/* About */}
           <div className="pd-card">
             <h2 className="pd-card-title">
-              <span className="pd-card-icon">📋</span> About the Project
+              <span className="pd-card-icon">Ã°Å¸â€œâ€¹</span> About the Project
             </h2>
             <p className="pd-card-text">{proj.description}</p>
           </div>
@@ -124,7 +126,7 @@ const ProjectDetail = () => {
           {/* Features */}
           <div className="pd-card">
             <h2 className="pd-card-title">
-              <span className="pd-card-icon">✨</span> Key Features
+              <span className="pd-card-icon">Ã¢Å“Â¨</span> Key Features
             </h2>
             <ul className="pd-features">
               {proj.features.map((f, i) => (
@@ -139,7 +141,7 @@ const ProjectDetail = () => {
           {/* Tech Stack */}
           <div className="pd-card">
             <h2 className="pd-card-title">
-              <span className="pd-card-icon">🛠️</span> Tech Stack
+              <span className="pd-card-icon">Ã°Å¸â€ºÂ Ã¯Â¸Â</span> Tech Stack
             </h2>
             <div className="pd-tech">
               {proj.technologies.map((t, i) => (
@@ -158,7 +160,7 @@ const ProjectDetail = () => {
             {recommended.map((p) => (
                 <Link
                   key={p.id}
-                  to={`/work/${p.domain.toLowerCase().replace(/\s/g, "-")}/${p.id}`}
+                  to={`/project/${p.domain.toLowerCase().replace(/[\s/]+/g, "-")}/${p.id}`}
                   className="pd-rec-card"
                   style={{ "--domain-color": p.domainColor }}
                 >
@@ -168,7 +170,7 @@ const ProjectDetail = () => {
                   </div>
                   <h3 className="pd-rec-name">{p.title}</h3>
                   <p className="pd-rec-desc">{p.description}</p>
-                  <span className="pd-rec-arrow">View Project →</span>
+                  <span className="pd-rec-arrow">View Project Ã¢â€ â€™</span>
                 </Link>
               ))}
           </div>
