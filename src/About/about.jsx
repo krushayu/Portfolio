@@ -229,7 +229,7 @@ const About = () => {
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
                     <circle cx="12" cy="9" r="2.5" />
                   </svg>
-                  <span>Paralakhemundi, Odisha, India</span>
+                  <span>Muzaffarpur, Bihar, India</span>
                 </div>
               </div>
             </div>
@@ -384,29 +384,77 @@ const About = () => {
                   <h3 className="section-title">Skills & Technologies</h3>
                 </div>
 
-                <div className="skills-container">
-                  <div className="skill-group">
-                    <h4 className="skill-group-title">Primary Stack</h4>
-                    <div className="skill-chips">
-                      <span className="skill-chip">MERN Stack</span>
-                      <span className="skill-chip">Node.js</span>
-                      <span className="skill-chip">React.js</span>
-                      <span className="skill-chip">MongoDB</span>
-                      <span className="skill-chip">Express.js</span>
-                      <span className="skill-chip">Cloudinary</span>
+                <div className="skills-bento">
+
+                  {/* Big card - Full Stack */}
+                  <div className="sb-card sb-card--wide sb-card--glow-blue">
+                    <div className="sb-card-tag">01</div>
+                    <h4 className="sb-card-title">Full Stack</h4>
+                    <div className="sb-pills">
+                      {[{n:"React.js",c:"#61DAFB"},{n:"Node.js",c:"#68A063"},{n:"Express.js",c:"#aaa"},{n:"MongoDB",c:"#47A248"},{n:"MERN Stack",c:"#fff"},{n:"REST API",c:"#888"},{n:"Socket.io",c:"#fff"},{n:"JavaScript",c:"#F7DF1E"}].map((s,i)=>(
+                        <span key={i} className="sb-pill" style={{"--pc":s.c}}>{s.n}</span>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="skill-group">
-                    <h4 className="skill-group-title">Core Strengths</h4>
-                    <div className="skill-chips">
-                      <span className="skill-chip">Full-Stack Dev</span>
-                      <span className="skill-chip">API Integration</span>
-                      <span className="skill-chip">UI/UX Design</span>
-                      <span className="skill-chip">Problem Solving</span>
-                      <span className="skill-chip">Clean Code</span>
+                  {/* Python & AI */}
+                  <div className="sb-card sb-card--glow-purple">
+                    <div className="sb-card-tag">02</div>
+                    <h4 className="sb-card-title">Python & AI/ML</h4>
+                    <div className="sb-pills">
+                      {[{n:"Python",c:"#3572A5"},{n:"ML",c:"#FF6B6B"},{n:"OpenCV",c:"#5C3EE8"},{n:"TensorFlow",c:"#FF6F00"},{n:"YOLOv8",c:"#00BFFF"},{n:"NLP",c:"#9B59B6"}].map((s,i)=>(
+                        <span key={i} className="sb-pill" style={{"--pc":s.c}}>{s.n}</span>
+                      ))}
                     </div>
                   </div>
+
+                  {/* Angular / MEAN */}
+                  <div className="sb-card sb-card--glow-red">
+                    <div className="sb-card-tag">03</div>
+                    <h4 className="sb-card-title">MEAN & Angular</h4>
+                    <div className="sb-pills">
+                      {[{n:"Angular",c:"#DD0031"},{n:"TypeScript",c:"#3178C6"},{n:"MEAN Stack",c:"#eee"},{n:"RxJS",c:"#B7178C"}].map((s,i)=>(
+                        <span key={i} className="sb-pill" style={{"--pc":s.c}}>{s.n}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Databases */}
+                  <div className="sb-card sb-card--glow-green">
+                    <div className="sb-card-tag">04</div>
+                    <h4 className="sb-card-title">Databases</h4>
+                    <div className="sb-pills">
+                      {[{n:"MongoDB",c:"#47A248"},{n:"MySQL",c:"#4479A1"},{n:"SQL",c:"#336791"}].map((s,i)=>(
+                        <span key={i} className="sb-pill" style={{"--pc":s.c}}>{s.n}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Dev Tools */}
+                  <div className="sb-card sb-card--glow-orange">
+                    <div className="sb-card-tag">05</div>
+                    <h4 className="sb-card-title">Tools & Deploy</h4>
+                    <div className="sb-pills">
+                      {[{n:"Git",c:"#F05032"},{n:"GitHub",c:"#eee"},{n:"Vercel",c:"#eee"},{n:"Render",c:"#46E3B7"},{n:"Cloudinary",c:"#3448C5"},{n:"VS Code",c:"#007ACC"}].map((s,i)=>(
+                        <span key={i} className="sb-pill" style={{"--pc":s.c}}>{s.n}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Core Strengths - full width bottom */}
+                  <div className="sb-card sb-card--wide sb-card--strengths">
+                    <div className="sb-card-tag">06</div>
+                    <h4 className="sb-card-title">Core Strengths</h4>
+                    <div className="sb-strengths-row">
+                      {["Full-Stack Dev","API Integration","UI/UX Design","Problem Solving","Clean Code","Scalable Architecture"].map((s,i)=>(
+                        <div key={i} className="sb-strength-item">
+                          <span className="sb-strength-num">0{i+1}</span>
+                          <span className="sb-strength-text">{s}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
