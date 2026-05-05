@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import "./chatbot.css";
 
 const SYSTEM_PROMPT = `You are "Bachchaa" — a portfolio assistant ONLY for Aayush Shrivastava's portfolio website (krushayu.in).
@@ -95,6 +95,19 @@ const Chatbot = () => {
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const audioRef = useRef(null);
+  const windowRef = useRef(null);
+  const dragRef = useRef({ dragging: false, startX: 0, startY: 0, origX: 0, origY: 0 });
+  const resizeRef = useRef({ resizing: false, startX: 0, startY: 0, origW: 0, origH: 0 });
+  const [pos, setPos] = useState({ x: null, y: null });
+  const [size, setSize] = useState({ w: 320, h: 460 });
+  const isMobile = window.innerWidth <= 480;
+
+  // Reset position and size when closed
+  const handleClose = () => {
+    setOpen(false);
+    setPos({ x: null, y: null });
+    setSize({ w: 320, h: 460 });
+  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -103,6 +116,67 @@ const Chatbot = () => {
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 100);
   }, [open]);
+
+  // ===== DRAG TO MOVE =====
+  const onDragStart = useCallback((e) => {
+    if (isMobile) return;
+    const win = windowRef.current;
+    if (!win) return;
+    const rect = win.getBoundingClientRect();
+    dragRef.current = {
+      dragging: true,
+      startX: e.clientX, startY: e.clientY,
+      origX: rect.left, origY: rect.top,
+    };
+    e.preventDefault();
+  }, [isMobile]);
+
+  useEffect(() => {
+    const onMove = (e) => {
+      if (!dragRef.current.dragging) return;
+      const dx = e.clientX - dragRef.current.startX;
+      const dy = e.clientY - dragRef.current.startY;
+      const newX = dragRef.current.origX + dx;
+      const newY = dragRef.current.origY + dy;
+      const maxX = window.innerWidth - size.w;
+      const maxY = window.innerHeight - size.h;
+      setPos({ x: Math.max(0, Math.min(newX, maxX)), y: Math.max(0, Math.min(newY, maxY)) });
+    };
+    const onUp = () => { dragRef.current.dragging = false; };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+  }, [size]);
+
+  // ===== RESIZE =====
+  const onResizeStart = useCallback((e) => {
+    if (isMobile) return;
+    const win = windowRef.current;
+    if (!win) return;
+    resizeRef.current = {
+      resizing: true,
+      startX: e.clientX, startY: e.clientY,
+      origW: win.offsetWidth, origH: win.offsetHeight,
+    };
+    e.preventDefault();
+    e.stopPropagation();
+  }, [isMobile]);
+
+  useEffect(() => {
+    const onMove = (e) => {
+      if (!resizeRef.current.resizing) return;
+      const dx = e.clientX - resizeRef.current.startX;
+      const dy = e.clientY - resizeRef.current.startY;
+      setSize({
+        w: Math.max(280, Math.min(600, resizeRef.current.origW + dx)),
+        h: Math.max(360, Math.min(700, resizeRef.current.origH + dy)),
+      });
+    };
+    const onUp = () => { resizeRef.current.resizing = false; };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+  }, []);
 
   // ===== SEND TEXT MESSAGE =====
   const sendMessage = async (text) => {
@@ -266,7 +340,7 @@ const Chatbot = () => {
   return (
     <>
       {/* Toggle Button */}
-      <button className={`cb-toggle ${open ? "open" : ""}`} onClick={() => setOpen(!open)} aria-label="Chat">
+      <button className={`cb-toggle ${open ? "open" : ""}`} onClick={() => open ? handleClose() : setOpen(true)} aria-label="Chat">
         {open ? (
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round"/>
@@ -281,9 +355,19 @@ const Chatbot = () => {
 
       {/* Chat Window */}
       {open && (
-        <div className="cb-window">
-          {/* Header */}
-          <div className="cb-header">
+        <div
+          className="cb-window"
+          ref={windowRef}
+          style={!isMobile && pos.x !== null ? {
+            left: pos.x, top: pos.y,
+            right: 'auto', bottom: 'auto',
+            width: size.w, height: size.h,
+          } : !isMobile ? {
+            width: size.w, height: size.h,
+          } : {}}
+        >
+          {/* Header — drag handle */}
+          <div className="cb-header" onMouseDown={onDragStart} style={{ cursor: isMobile ? 'default' : 'grab' }}>
             <div className="cb-header-left">
               <div className="cb-avatar">K</div>
               <div>
@@ -291,11 +375,20 @@ const Chatbot = () => {
                 <p className="cb-status"><span className="cb-dot" />Online 24/7</p>
               </div>
             </div>
-            <button className="cb-close" onClick={() => setOpen(false)}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
-                <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round"/>
-              </svg>
-            </button>
+            <div className="cb-header-right">
+              {!isMobile && (
+                <div className="cb-move-hint" title="Drag to move">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
+                    <path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M12 3v18M3 12h18" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              )}
+              <button className="cb-close" onClick={handleClose}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
+                  <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
           </div>
 
           {/* Messages */}
@@ -371,6 +464,14 @@ const Chatbot = () => {
             </button>
           </div>
           <p className="cb-footer-note">Bachchaa · Voice enabled · Portfolio trained</p>
+          {/* Resize handle */}
+          {!isMobile && (
+            <div className="cb-resize-handle" onMouseDown={onResizeStart} title="Resize">
+              <svg viewBox="0 0 10 10" fill="currentColor" width="10" height="10">
+                <path d="M8 2L2 8M5 2L2 5M8 5L5 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </div>
+          )}
         </div>
       )}
     </>
