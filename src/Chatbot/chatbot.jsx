@@ -117,36 +117,48 @@ const Chatbot = () => {
     if (open) setTimeout(() => inputRef.current?.focus(), 100);
   }, [open]);
 
-  // ===== DRAG TO MOVE =====
+  // ===== DRAG TO MOVE (mouse + touch) =====
   const onDragStart = useCallback((e) => {
-    if (isMobile) return;
     const win = windowRef.current;
     if (!win) return;
     const rect = win.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     dragRef.current = {
       dragging: true,
-      startX: e.clientX, startY: e.clientY,
+      startX: clientX, startY: clientY,
       origX: rect.left, origY: rect.top,
     };
-    e.preventDefault();
-  }, [isMobile]);
+    if (!e.touches) e.preventDefault();
+  }, []);
 
   useEffect(() => {
     const onMove = (e) => {
       if (!dragRef.current.dragging) return;
-      const dx = e.clientX - dragRef.current.startX;
-      const dy = e.clientY - dragRef.current.startY;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const dx = clientX - dragRef.current.startX;
+      const dy = clientY - dragRef.current.startY;
       const newX = dragRef.current.origX + dx;
       const newY = dragRef.current.origY + dy;
-      const maxX = window.innerWidth - size.w;
-      const maxY = window.innerHeight - size.h;
+      const winW = isMobile ? size.w : size.w;
+      const winH = isMobile ? size.h : size.h;
+      const maxX = window.innerWidth - winW;
+      const maxY = window.innerHeight - winH;
       setPos({ x: Math.max(0, Math.min(newX, maxX)), y: Math.max(0, Math.min(newY, maxY)) });
     };
     const onUp = () => { dragRef.current.dragging = false; };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-    return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
-  }, [size]);
+    window.addEventListener('touchmove', onMove, { passive: true });
+    window.addEventListener('touchend', onUp);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('touchmove', onMove);
+      window.removeEventListener('touchend', onUp);
+    };
+  }, [size, isMobile]);
 
   // ===== RESIZE =====
   const onResizeStart = useCallback((e) => {
@@ -358,7 +370,7 @@ const Chatbot = () => {
         <div
           className="cb-window"
           ref={windowRef}
-          style={!isMobile && pos.x !== null ? {
+          style={pos.x !== null ? {
             left: pos.x, top: pos.y,
             right: 'auto', bottom: 'auto',
             width: size.w, height: size.h,
@@ -367,7 +379,7 @@ const Chatbot = () => {
           } : {}}
         >
           {/* Header — drag handle */}
-          <div className="cb-header" onMouseDown={onDragStart} style={{ cursor: isMobile ? 'default' : 'grab' }}>
+          <div className="cb-header" onMouseDown={onDragStart} onTouchStart={onDragStart} style={{ cursor: isMobile ? 'grab' : 'grab' }}>
             <div className="cb-header-left">
               <div className="cb-avatar">K</div>
               <div>
