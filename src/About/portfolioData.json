@@ -1,4 +1,36 @@
 {
+  "experiences": [
+    {
+      "company": "Diagonal Consulting",
+      "role": "Software Engineering Intern",
+      "type": "Internship",
+      "employmentType": "Full-time",
+      "duration": "May 2026 - Present ",
+      "location": "India · Remote",
+      "description": "Selected as a Software Engineering Intern at Diagonal Consulting LLP.",
+      "certificateLink": ""
+    },
+    {
+      "company": "DIGISAMAKSH",
+      "role": "Web Developer",
+      "type": "Internship",
+      "employmentType": "Full-time",
+      "duration": "June 2025 - August 2025 · 3 mos",
+      "location": "India · Remote",
+      "description": "Worked on real-world web applications, developing responsive and scalable user interfaces.",
+      "certificateLink": "https://digisamaksh-my.sharepoint.com/:i:/p/hr/IQDe8UasDwAxSoxC1pfeeznUASpYO2dVt5Ticr2CVY0v22g?e=WDT9Gd"
+    },
+    {
+      "company": "CodeAlpha",
+      "role": "Frontend Developer",
+      "type": "Internship",
+      "employmentType": "Part-time",
+      "duration": "May 2025 - May 2025 · 1 mos",
+      "location": "India · Remote",
+      "description": "Built modern responsive frontend components and improved UI consistency.",
+      "certificateLink": "https://media.licdn.com/dms/image/v2/D4D22AQEWmwpkmdd2Rg/feedshare-shrink_800/B4DZcq0HfvGUAg-/0/1748770001914?e=1777507200&v=beta&t=pFgReYce6Oi0G5pPsVSOmSboVl1EUDI4I7s7sApJ3YQ"
+    }
+  ],
   "certifications": [
     {
       "title": "Gemini Certified University Student",

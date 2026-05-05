@@ -1290,3 +1290,51 @@
   .sb-card--wide { grid-column: 1; }
   .sb-strengths-row { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ===== EXPERIENCE BADGES ===== */
+.experience-badges {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.exp-type-badge {
+  font-size: 0.68rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+  background: rgba(34, 193, 195, 0.12);
+  color: #22c1c3;
+  border: 1px solid rgba(34, 193, 195, 0.25);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.exp-emp-badge {
+  font-size: 0.68rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: 0.04em;
+}
+
+.experience-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.experience-location {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.experience-desc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}

@@ -6,6 +6,7 @@ import profileImg from "../assest/profile.jpg";
 import pData from "./portfolioData.json";
 
 const { certifications, achievements } = pData;
+const experiences = pData.experiences || [];
 
 const AchievementItem = ({ ach }) => {
   const [open, setOpen] = useState(false);
@@ -173,7 +174,7 @@ const About = () => {
     <div className="about-page">
       <SEO
         title="About"
-        description="About Aayush Shrivastava (krushayu) — B.Tech CS student at Centurion University. Experience at DIGISAMAKSH & CodeAlpha. Certified by Google, GeeksForGeeks, Infosys. Hackathon winner."
+        description="About Aayush Shrivastava (krushayu) – B.Tech CS student at Centurion University. Experience at DIGISAMAKSH & CodeAlpha. Certified by Google, GeeksForGeeks, Infosys. Hackathon winner."
         url="/about"
         keywords="Aayush Shrivastava about, krushayu education, krushayu experience, krushayu certifications, Centurion University developer"
       />
@@ -313,60 +314,43 @@ const About = () => {
                 </div>
 
                 <div className="experience-list">
-                  <div className="experience-card">
-                    <div className="experience-header">
-                      <div>
-                        <h4 className="experience-company">DIGISAMAKSH</h4>
-                        <p className="experience-role">Web Developer</p>
+                  {experiences.map((exp, i) => (
+                    <div className="experience-card" key={i}>
+                      <div className="experience-header">
+                        <div>
+                          <h4 className="experience-company">{exp.company}</h4>
+                          <p className="experience-role">{exp.role}</p>
+                          <div className="experience-badges">
+                            <span className="exp-type-badge">{exp.type}</span>
+                            <span className="exp-emp-badge">{exp.employmentType}</span>
+                          </div>
+                        </div>
+                        <div className="experience-meta">
+                          <span className="experience-duration">{exp.duration}</span>
+                          <span className="experience-location">{exp.location}</span>
+                        </div>
                       </div>
-                      <span className="experience-duration">June 2025 – Aug 2025</span>
+                      {exp.description && (
+                        <p className="experience-desc">{exp.description}</p>
+                      )}
+                      {exp.certificateLink && (
+                        <div className="experience-documents">
+                          <a href={exp.certificateLink} target="_blank" rel="noopener noreferrer" className="doc-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                              <polyline points="14 2 14 8 20 8" />
+                              <line x1="16" y1="13" x2="8" y2="13" />
+                              <line x1="16" y1="17" x2="8" y2="17" />
+                            </svg>
+                            Certificate
+                          </a>
+                        </div>
+                      )}
                     </div>
-                    <div className="experience-documents">
-                      <a
-                        href="https://digisamaksh-my.sharepoint.com/:i:/p/hr/IQDe8UasDwAxSoxC1pfeeznUASpYO2dVt5Ticr2CVY0v22g?e=WDT9Gd"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="doc-link"
-                      >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                          <polyline points="14 2 14 8 20 8" />
-                          <line x1="16" y1="13" x2="8" y2="13" />
-                          <line x1="16" y1="17" x2="8" y2="17" />
-                          <polyline points="10 9 9 9 8 9" />
-                        </svg>
-                        Certificate
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="experience-card">
-                    <div className="experience-header">
-                      <div>
-                        <h4 className="experience-company">CodeAlpha</h4>
-                        <p className="experience-role">Frontend Developer</p>
-                      </div>
-                      <span className="experience-duration">May 2025 – June 2025</span>
-                    </div>
-                    <div className="experience-documents">
-                      <a
-                        href="https://media.licdn.com/dms/image/v2/D4D22AQEWmwpkmdd2Rg/feedshare-shrink_800/B4DZcq0HfvGUAg-/0/1748770001914?e=1777507200&v=beta&t=pFgReYce6Oi0G5pPsVSOmSboVl1EUDI4I7s7sApJ3YQ"
-                        className="doc-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                          <polyline points="14 2 14 8 20 8" />
-                          <line x1="16" y1="13" x2="8" y2="13" />
-                          <line x1="16" y1="17" x2="8" y2="17" />
-                          <polyline points="10 9 9 9 8 9" />
-                        </svg>
-                        Certificate
-                      </a>
-                    </div>
-                  </div>
+                  ))}
                 </div>
+
+
               </div>
             </div>
 
@@ -383,7 +367,6 @@ const About = () => {
                   </div>
                   <h3 className="section-title">Skills & Technologies</h3>
                 </div>
-
                 <div className="skills-bento">
 
                   {/* Big card - Full Stack */}
