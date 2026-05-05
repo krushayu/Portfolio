@@ -118,7 +118,7 @@ const ProjectDetail = () => {
           {/* About */}
           <div className="pd-card">
             <h2 className="pd-card-title">
-              <span className="pd-card-icon">Ã°Å¸â€œâ€¹</span> About the Project
+              <span className="pd-card-icon">📋</span> About the Project
             </h2>
             <p className="pd-card-text">{proj.description}</p>
           </div>
@@ -126,7 +126,7 @@ const ProjectDetail = () => {
           {/* Features */}
           <div className="pd-card">
             <h2 className="pd-card-title">
-              <span className="pd-card-icon">Ã¢Å“Â¨</span> Key Features
+              <span className="pd-card-icon">✨</span> Key Features
             </h2>
             <ul className="pd-features">
               {proj.features.map((f, i) => (
@@ -141,7 +141,7 @@ const ProjectDetail = () => {
           {/* Tech Stack */}
           <div className="pd-card">
             <h2 className="pd-card-title">
-              <span className="pd-card-icon">Ã°Å¸â€ºÂ Ã¯Â¸Â</span> Tech Stack
+              <span className="pd-card-icon">🛠️</span> Tech Stack
             </h2>
             <div className="pd-tech">
               {proj.technologies.map((t, i) => (
@@ -170,7 +170,7 @@ const ProjectDetail = () => {
                   </div>
                   <h3 className="pd-rec-name">{p.title}</h3>
                   <p className="pd-rec-desc">{p.description}</p>
-                  <span className="pd-rec-arrow">View Project Ã¢â€ â€™</span>
+                  <span className="pd-rec-arrow">View Project →</span>
                 </Link>
               ))}
           </div>
