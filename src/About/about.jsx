@@ -43,7 +43,7 @@ const AchievementItem = ({ ach }) => {
 
 
 const LINES = [
-  "If it's according to your wish then it's good, if it's not according to your wish then it's even better, because whatever is not according to your wish is according to their wish...",
+  "If anything according to your wish then it's good, if it's not then it's even better, because whatever is not according to your wish is according to their wish...",
 ];
 
 const About = () => {
