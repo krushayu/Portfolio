@@ -442,11 +442,11 @@ const Chatbot = () => {
             )}
             <div ref={messagesEndRef} />
           </div>
-
+<div>Under Maintance</div>
           {/* Input */}
           <div className="cb-input-area">
             {/* Mic Button */}
-            <button
+            {/* <button
               className={`cb-mic ${recording ? "recording" : ""}`}
               onClick={recording ? stopRecording : startRecording}
               title={recording ? "Tap to send" : "Hold to speak"}
@@ -474,7 +474,7 @@ const Chatbot = () => {
                 <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
-          </div>
+          </div> */}
           <p className="cb-footer-note">Bachchaa · Voice enabled · Portfolio trained</p>
           {/* Resize handle */}
           {!isMobile && (
