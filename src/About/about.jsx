@@ -43,7 +43,7 @@ const AchievementItem = ({ ach }) => {
 
 
 const LINES = [
-  "If anything according to your wish then it's good, if it's not then it's even better, because whatever is not according to your wish is according to their wish...",
+  "करने से पहले कभी सोचा नहीं, और करने के बाद सोचने का कोई मतलब नहीं",
 ];
 
 const About = () => {
