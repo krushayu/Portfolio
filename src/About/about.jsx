@@ -237,7 +237,7 @@ const About = () => {
 
             <div className="hero-description">
               <p className="description-primary">
-                I believe in:{" "}
+                {" "}
                 <span className="highlight-gradient">{typed}{!typeDone && <span className="type-cursor">|</span>}</span>
               </p>
               <p className="description-secondary">
