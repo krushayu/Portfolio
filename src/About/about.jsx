@@ -493,7 +493,7 @@ const About = () => {
             </div>
             <div className="resume-text">
               <h3 className="resume-title">Download My Resume</h3>
-              <p className="resume-subtitle">Get a detailed overview of my experience and skills</p>
+              {/* <p className="resume-subtitle">Get a detailed overview of my experience and skills</p> */}
             </div>
             <a
               href="/Resume_Aayush.pdf"
@@ -524,7 +524,7 @@ const About = () => {
             </a>
           </div>
         </div>
-
+<div>This is the older one.. Resume with new updates are added soon..</div>
         <footer className="about-footer">
           <div className="footer-content">
             <div className="signature">© 2026 Aayushya Shrivastava</div>
