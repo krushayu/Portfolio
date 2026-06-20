@@ -33,6 +33,11 @@
   ],
   "certifications": [
     {
+      "title": "BLOCKCHAIN AND WEB 3.0",
+      "issuer": "UNIC - Institute For the Future (IFF)",
+      "link": "https://drive.google.com/file/d/10SkvKNWP2Y5WX6mFziuWT9lhz9zDavek/view?usp=sharing"
+    },
+    {
       "title": "Gemini Certified University Student",
       "issuer": "Google",
       "link": "https://edu.google.accredible.com/a7654f76-353b-4ab3-b867-b38a351c7fc3#acc.ITSuOAVX"
@@ -60,7 +65,11 @@
       "description": "Won 1st place for developing HealthHub — A Health Data Management Web App with appointment booking and doctor consultation features.",
       "projectLink": "http://health-hub-cutm-pkd.vercel.app/",
       "projectName": "HealthHub",
-      "tags": ["HealthTech", "Web App", "Real-time"],
+      "tags": [
+        "HealthTech",
+        "Web App",
+        "Real-time"
+      ],
       "eventLink": "https://drive.google.com/file/d/1bNROCK9gMjpcDwSais1fVsK1UXFETsqJ/view?usp=sharing"
     },
     {
