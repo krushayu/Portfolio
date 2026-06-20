@@ -8,7 +8,7 @@
       "duration": "May 2026 - Present ",
       "location": "India · Remote",
       "description": "Selected as a Software Engineering Intern at Diagonal Consulting LLP.",
-      "certificateLink": ""
+      "certificateLink": "#"
     },
     {
       "company": "DIGISAMAKSH",
@@ -28,7 +28,7 @@
       "duration": "May 2025 - May 2025 · 1 mos",
       "location": "India · Remote",
       "description": "Built modern responsive frontend components and improved UI consistency.",
-      "certificateLink": "https://media.licdn.com/dms/image/v2/D4D22AQEWmwpkmdd2Rg/feedshare-shrink_800/B4DZcq0HfvGUAg-/0/1748770001914?e=1777507200&v=beta&t=pFgReYce6Oi0G5pPsVSOmSboVl1EUDI4I7s7sApJ3YQ"
+      "certificateLink": "https://drive.google.com/file/d/1GEN-_z3S-BIbkRFESCBBuClvSFK_M9Ph/view?usp=sharing"
     }
   ],
   "certifications": [
@@ -45,12 +45,12 @@
     {
       "title": "Angular Web Developer Certification",
       "issuer": "Infosys",
-      "link": "https://media.licdn.com/dms/image/v2/D561FAQElIjCvv_1aQA/feedshare-document-images_480/B56Z14re0lGoAg-/2/1775846158884?e=1776902400&v=beta&t=ZM6vh54NV7QU7FSFdQ_YhF-VaccUiuqZr9kKt_yQDLw"
+      "link": "https://drive.google.com/file/d/13wWcOhxbm3NyNjNQmHwMICIYCBwt1pSR/view?usp=sharing"
     },
     {
       "title": "Angular Certification",
       "issuer": "Infosys",
-      "link": "https://media.licdn.com/dms/image/v2/D561FAQElIjCvv_1aQA/feedshare-document-cover-images_1920/B56Z14re0lGoBQ-/0/1775846159374?e=1776495600&v=beta&t=144izhqzZGGtFohqVpd0IuW3zIbhKt_YtTEGsg2WbUo"
+      "link": "https://drive.google.com/file/d/10OVP6lPbWHq4l_AodNht7TSQ17RNjluS/view?usp=sharing"
     }
   ],
   "achievements": [
@@ -61,16 +61,16 @@
       "projectLink": "http://health-hub-cutm-pkd.vercel.app/",
       "projectName": "HealthHub",
       "tags": ["HealthTech", "Web App", "Real-time"],
-      "eventLink": "https://media.licdn.com/dms/image/v2/D4D22AQFTkc3SovHiqg/feedshare-shrink_800/B4DZWoP87TG4Ag-/0/1742284515056?e=1768435200&v=beta&t=_Ziq5o0Usgneggf7q2mkB2u_AqIVYs6GlfOhL-3kigU"
+      "eventLink": "https://drive.google.com/file/d/1bNROCK9gMjpcDwSais1fVsK1UXFETsqJ/view?usp=sharing"
     },
     {
       "title": "Successful Deliver IEEE Scopes Conference Website to CUTM",
       "badge": "https://img.icons8.com/?size=100&id=52150&format=png&color=000000",
       "description": "Led the development and delivery of a fully responsive IEEE SCOPES conference website for CUTM.",
-      "projectLink": "http://scopes-2027.onrender.com",
+      "projectLink": "#",
       "projectName": "Scopes Conference Website 2027",
       "tags": [],
-      "eventLink": "https://media.licdn.com/dms/image/v2/D4D22AQFTkc3SovHiqg/feedshare-shrink_800/B4DZWoP87TG4Ag-/0/1742284515056?e=1768435200&v=beta&t=_Ziq5o0Usgneggf7q2mkB2u_AqIVYs6GlfOhL-3kigU"
+      "eventLink": "#"
     }
   ]
 }
