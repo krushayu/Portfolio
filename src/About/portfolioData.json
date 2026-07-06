@@ -8,7 +8,7 @@
       "duration": "May 2026 - June 2026 · 2 mos ",
       "location": "India · Remote",
       "description": "Selected as a Software Engineering Intern at Diagonal Consulting LLP.",
-      "certificateLink": "#"
+      "certificateLink": "https://drive.google.com/file/d/1T6us8_nRDWnwIq_V5Ruf7bl0hy2PyTcl/view?usp=sharing"
     },
     {
       "company": "DIGISAMAKSH",
@@ -65,7 +65,15 @@
       "description": "Won 1st place for developing HealthHub — A Health Data Management Web App with appointment booking and doctor consultation features.",
       "projectLink": "http://health-hub-cutm-pkd.vercel.app/",
       "projectName": "HealthHub",
+<<<<<<< HEAD
       "tags": [],
+=======
+      "tags": [
+        "HealthTech",
+        "Web App",
+        "Real-time"
+      ],
+>>>>>>> 8903853 (new update)
       "eventLink": "https://drive.google.com/file/d/1bNROCK9gMjpcDwSais1fVsK1UXFETsqJ/view?usp=sharing"
     },
     {
