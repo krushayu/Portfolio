@@ -65,15 +65,11 @@
       "description": "Won 1st place for developing HealthHub — A Health Data Management Web App with appointment booking and doctor consultation features.",
       "projectLink": "http://health-hub-cutm-pkd.vercel.app/",
       "projectName": "HealthHub",
-<<<<<<< HEAD
-      "tags": [],
-=======
       "tags": [
         "HealthTech",
         "Web App",
         "Real-time"
       ],
->>>>>>> 8903853 (new update)
       "eventLink": "https://drive.google.com/file/d/1bNROCK9gMjpcDwSais1fVsK1UXFETsqJ/view?usp=sharing"
     },
     {
